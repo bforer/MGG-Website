@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import HeroSplide from '../components/HeroSplide.astro';
+import WhatWeDoGrid from '../components/WhatWeDoGrid.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { services } from '../data/ssot';
+import { siteConfig } from '../data/seo';
+---
+
+<Base
+	title={siteConfig.title}
+	description={siteConfig.description}
+	image="/og-home.jpg"
+>
+	<!-- Service Schema for all services -->
+	<StructuredData
+		type="Service"
+		data={{
+			serviceType: 'Event Production Services',
+			provider: {
+				'@type': 'Organization',
+				name: siteConfig.name,
+			},
+			areaServed: 'Worldwide',
+			hasOfferCatalog: {
+				'@type': 'OfferCatalog',
+				name: 'Event Production Services',
+				itemListElement: services.map((service, index) => ({
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: service.title,
+						description: service.blurb,
+					},
+					position: index + 1,
+				})),
+			},
+		}}
+	/>
+
+	<HeroSplide />
+	<WhatWeDoGrid items={services} />
+	<section id="connect" class="mx-auto max-w-7xl px-6 py-24">
+		<!-- Your form / CTA here -->
+	</section>
+</Base>
+

@@ -1,0 +1,76 @@
+---
+const images = Object.entries(
+	import.meta.glob('/src/assets/lookbook/*.{png,jpg,jpeg,webp,gif}', {
+		eager: true,
+		query: '?url',
+		import: 'default',
+	})
+).map(([path, url]) => ({ url, alt: path.split('/').pop() }));
+const imagesJson = JSON.stringify(images);
+---
+
+<section class="mx-auto max-w-7xl px-6 py-24">
+	<h2 class="text-3xl md:text-4xl font-semibold mb-10">Look Book</h2>
+
+	<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+		{images.map((img, idx) => (
+			<button
+				class="group relative overflow-hidden rounded-xl border border-white/10"
+				aria-label={`Open ${img.alt}`}
+				data-index={idx}
+				onclick={`openModal(${idx})`}
+			>
+				<img
+					src={img.url}
+					alt={img.alt}
+					loading="lazy"
+					class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+				/>
+			</button>
+		))}
+	</div>
+
+	<!-- Modal -->
+	<div
+		id="lb-modal"
+		class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-6"
+	>
+		<button
+			id="lb-close"
+			class="absolute top-4 right-4 rounded-full border border-white/20 px-3 py-1 text-sm"
+		>
+			Close
+		</button>
+		<img
+			id="lb-img"
+			src=""
+			alt=""
+			class="max-h-[85vh] max-w-[90vw] rounded-xl shadow-2xl"
+		/>
+	</div>
+
+	<script is:inline set:html={`
+		const modal = document.getElementById('lb-modal');
+		const modalImg = document.getElementById('lb-img');
+		const modalClose = document.getElementById('lb-close');
+		const sources = { images: ${imagesJson} };
+
+		function openModal(index) {
+			modalImg.src = sources.images[index].url;
+			modalImg.alt = sources.images[index].alt;
+			modal.classList.remove('hidden');
+			modal.classList.add('flex');
+		}
+
+		modalClose?.addEventListener('click', () => {
+			modal.classList.add('hidden');
+			modal.classList.remove('flex');
+			modalImg.src = '';
+		});
+		modal?.addEventListener('click', (e) => {
+			if (e.target === modal) modalClose.click();
+		});
+		window.openModal = openModal;
+	`} />
+</section>
+

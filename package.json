@@ -1,0 +1,22 @@
+{
+	"name": "mgg-event-planning",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "astro": "^4.15.0"
+  },
+	"devDependencies": {
+		"@astrojs/sitemap": "^3.2.0",
+		"@astrojs/tailwind": "^5.1.4",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5.4.5"
+	}
+}

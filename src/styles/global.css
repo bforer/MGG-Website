@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--bg: #0c0c0d;
+	--ink: #ffffff;
+	--ink-muted: rgba(255, 255, 255, 0.75);
+}
+
+html,
+body {
+	background: var(--bg);
+	color: var(--ink);
+	font-feature-settings: "liga" 1, "kern" 1;
+}

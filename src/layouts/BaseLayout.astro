@@ -1,0 +1,96 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { siteConfig, type SEOProps } from '../data/seo';
+import '../styles/global.css';
+
+interface Props extends SEOProps {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = siteConfig.title,
+	description = siteConfig.description,
+	...seoProps
+} = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+	<head>
+		<SEOHead title={title} description={description} {...seoProps} />
+
+		<!-- Organization Schema -->
+		<StructuredData
+			type="Organization"
+			data={{
+				name: siteConfig.name,
+				url: siteConfig.url,
+				logo: new URL('/logo.png', siteConfig.url).toString(),
+				sameAs: [
+					// Add social media URLs here
+					// 'https://www.facebook.com/mgg',
+					// 'https://www.instagram.com/mgg',
+					// 'https://www.linkedin.com/company/mgg',
+				],
+				contactPoint: {
+					'@type': 'ContactPoint',
+					contactType: 'Customer Service',
+					// email: 'info@mgg.com',
+					// telephone: '+1-XXX-XXX-XXXX',
+				},
+			}}
+		/>
+
+		<!-- Website Schema -->
+		<StructuredData
+			type="WebSite"
+			data={{
+				name: siteConfig.name,
+				url: siteConfig.url,
+				potentialAction: {
+					'@type': 'SearchAction',
+					target: {
+						'@type': 'EntryPoint',
+						urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
+					},
+					'query-input': 'required name=search_term_string',
+				},
+			}}
+		/>
+	</head>
+	<body class="font-sans antialiased bg-[var(--bg)] text-[var(--ink)]">
+		<header class="sticky top-0 z-50 bg-black/70 backdrop-blur border-b border-white/10">
+			<nav
+				class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between"
+				role="navigation"
+				aria-label="Main navigation"
+			>
+				<a href="/" class="font-semibold tracking-wide" aria-label="MGG Home">
+					MGG
+				</a>
+				<ul class="flex items-center gap-6 text-sm">
+					<li><a class="hover:opacity-80" href="/">Home</a></li>
+					<li>
+						<a class="hover:opacity-80" href="/what-we-do">What we do</a>
+					</li>
+					<li>
+						<a class="hover:opacity-80" href="/look-book">Look Book</a>
+					</li>
+					<li>
+						<a class="hover:opacity-80" href="/#connect">Let's connect</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="border-t border-white/10 mt-24" role="contentinfo">
+			<div class="mx-auto max-w-7xl px-6 py-10 text-sm text-white/70">
+				<p>© {new Date().getFullYear()} MGG. All rights reserved.</p>
+			</div>
+		</footer>
+	</body>
+</html>
+

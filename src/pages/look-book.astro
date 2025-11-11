@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { siteConfig } from '../data/seo';
+
+// Get images for structured data
+const images = Object.entries(
+	import.meta.glob('/src/assets/lookbook/*.{png,jpg,jpeg,webp,gif}', {
+		eager: true,
+		query: '?url',
+		import: 'default',
+	})
+).map(([path, url]) => ({
+	url: new URL(url, siteConfig.url).toString(),
+	alt: path.split('/').pop() || 'MGG Event Production',
+}));
+---
+
+<Base
+	title="Look Book — MGG"
+	description="Browse our portfolio of event production work including lighting design, sound engineering, and technical staging solutions."
+	image="/og-lookbook.jpg"
+>
+	<StructuredData
+		type="ImageGallery"
+		data={{
+			name: 'MGG Event Production Portfolio',
+			description:
+				'Gallery of event production work and technical staging solutions',
+			image: images.map((img) => ({
+				'@type': 'ImageObject',
+				contentUrl: img.url,
+				description: img.alt,
+			})),
+		}}
+	/>
+
+	<GalleryGrid />
+</Base>
+

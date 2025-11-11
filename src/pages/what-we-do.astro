@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import WhatWeDoGrid from '../components/WhatWeDoGrid.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { services } from '../data/ssot';
+import { siteConfig } from '../data/seo';
+---
+
+<Base
+	title="What we do — MGG"
+	description="Comprehensive event production services including lighting design, sound engineering, staging, and technical solutions for corporate events and live shows."
+	image="/og-what-we-do.jpg"
+>
+	<StructuredData
+		type="Service"
+		data={{
+			serviceType: 'Event Production Services',
+			provider: {
+				'@type': 'Organization',
+				name: siteConfig.name,
+			},
+			description:
+				'Professional event production and technical staging services',
+		}}
+	/>
+
+	<WhatWeDoGrid items={services} />
+</Base>
+

@@ -1,0 +1,34 @@
+---
+const { as = 'div', class: klass = '', delay = 0 } = Astro.props;
+const Tag = as as any;
+---
+
+<Tag
+	class={`reveal opacity-0 translate-y-6 transition duration-700 ease-out ${klass}`}
+>
+	<slot />
+</Tag>
+
+<style is:global>
+	.in-view {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+</style>
+
+<script is:inline client:load>
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((e) => {
+				if (e.isIntersecting) e.target.classList.add('in-view');
+			});
+		},
+		{ threshold: 0.16 }
+	);
+
+	document.querySelectorAll('.reveal').forEach((el, i) => {
+		(el as HTMLElement).style.transitionDelay = `${(i % 8) * 40}ms`;
+		observer.observe(el);
+	});
+</script>
+

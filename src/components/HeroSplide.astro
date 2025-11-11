@@ -1,0 +1,41 @@
+---
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+const slides: { src: string; alt?: string }[] = [
+	{ src: '/src/assets/hero/slide-1.jpg', alt: 'Stage Production' },
+	{ src: '/src/assets/hero/slide-2.jpg', alt: 'Corporate Event' },
+	{ src: '/src/assets/hero/slide-3.jpg', alt: 'Live Show' },
+];
+---
+
+<div class="relative">
+	<div class="splide" client:load>
+		<div class="splide__track">
+			<ul class="splide__list">
+				{slides.map((s) => (
+					<li class="splide__slide">
+						<img
+							src={s.src}
+							alt={s.alt}
+							class="w-full h-[60vh] md:h-[80vh] object-cover"
+						/>
+					</li>
+				))}
+			</ul>
+		</div>
+	</div>
+
+	<script type="module" client:load>
+		import Splide from '@splidejs/splide';
+		new Splide('.splide', {
+			type: 'loop',
+			speed: 700,
+			autoplay: true,
+			interval: 4200,
+			pauseOnHover: true,
+			arrows: true,
+			pagination: true,
+			rewind: true,
+		}).mount();
+	</script>
+</div>
+
