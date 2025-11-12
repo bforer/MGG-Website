@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-	--bg: #000000;
-	--ink: #ffffff;
-	--ink-muted: rgba(255, 255, 255, 0.75);
+	--bg: #ffffff;
+	--ink: #000000;
+	--ink-muted: rgba(0, 0, 0, 0.75);
 	--brand-yellow: #ffd700;
 }
 

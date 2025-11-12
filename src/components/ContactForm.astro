@@ -1,0 +1,312 @@
+---
+---
+
+<div>
+	<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Get in touch</h2>
+	
+	<form
+		id="contact-form"
+		class="space-y-6"
+		method="POST"
+	>
+		<!-- First Name -->
+		<div>
+			<label for="firstName" class="block text-sm font-semibold text-black mb-2">First Name *</label>
+			<input
+				type="text"
+				id="firstName"
+				name="firstName"
+				placeholder="First Name"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Last Name -->
+		<div>
+			<label for="lastName" class="block text-sm font-semibold text-black mb-2">Last Name *</label>
+			<input
+				type="text"
+				id="lastName"
+				name="lastName"
+				placeholder="Last Name"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Email -->
+		<div>
+			<label for="email" class="block text-sm font-semibold text-black mb-2">Email Address *</label>
+			<input
+				type="email"
+				id="email"
+				name="email"
+				placeholder="Email Address"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Confirm Email -->
+		<div>
+			<label for="confirmEmail" class="block text-sm font-semibold text-black mb-2">Confirm Your Email Address *</label>
+			<input
+				type="email"
+				id="confirmEmail"
+				name="confirmEmail"
+				placeholder="Confirm Your Email Address"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Contact Number -->
+		<div>
+			<label for="contactNumber" class="block text-sm font-semibold text-black mb-2">Contact Number *</label>
+			<input
+				type="tel"
+				id="contactNumber"
+				name="contactNumber"
+				placeholder="Contact Number"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Company Name -->
+		<div>
+			<label for="companyName" class="block text-sm font-semibold text-black mb-2">Company Name</label>
+			<input
+				type="text"
+				id="companyName"
+				name="companyName"
+				placeholder="Company Name"
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+		</div>
+
+		<!-- Branch Selection -->
+		<div>
+			<label for="branch" class="block text-sm font-semibold text-black mb-2">Select a Branch *</label>
+			<select
+				id="branch"
+				name="branch"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:border-black appearance-none bg-white"
+			>
+				<option value="">Select a Branch</option>
+				<option value="johannesburg">Johannesburg</option>
+				<option value="cape-town">Cape Town</option>
+			</select>
+		</div>
+
+		<!-- Date Fields -->
+		<div class="grid grid-cols-2 gap-4">
+			<div>
+				<label for="startDate" class="block text-sm font-semibold text-black mb-2">Start Date</label>
+				<input
+					type="date"
+					id="startDate"
+					name="startDate"
+					placeholder="Start Date"
+					class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+				/>
+			</div>
+			<div>
+				<label for="endDate" class="block text-sm font-semibold text-black mb-2">End Date</label>
+				<input
+					type="date"
+					id="endDate"
+					name="endDate"
+					placeholder="End Date"
+					class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+				/>
+			</div>
+		</div>
+
+		<!-- Number of Days -->
+		<div>
+			<label for="numberOfDays" class="block text-sm font-semibold text-black mb-2">Number of Days</label>
+			<input
+				type="number"
+				id="numberOfDays"
+				name="numberOfDays"
+				placeholder="Number of Days"
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
+			/>
+			<p class="mt-2 text-sm text-black">
+				Please enter the number of days in total that you will be renting the equipment for.
+			</p>
+		</div>
+
+		<!-- Message -->
+		<div>
+			<label for="message" class="block text-sm font-semibold text-black mb-2">Message *</label>
+			<textarea
+				id="message"
+				name="message"
+				rows="6"
+				placeholder="Message"
+				required
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black resize-y"
+			></textarea>
+		</div>
+
+		<!-- Disclaimer -->
+		<div class="space-y-4">
+			<h3 class="text-black font-bold">Disclaimer *</h3>
+			<div class="flex items-start gap-3">
+				<input
+					type="checkbox"
+					id="disclaimerCheck"
+					name="disclaimerCheck"
+					required
+					class="mt-1 w-4 h-4 border border-black rounded"
+				/>
+				<label for="disclaimerCheck" class="text-black text-sm">
+					I have read the below disclaimer
+				</label>
+			</div>
+			<div class="text-black text-sm leading-relaxed">
+				<p>
+					By submitting this form, you consent to MGG processing your personal information in accordance with the Protection of Personal Information Act (POPIA). Your information will be used solely for the purpose of responding to your inquiry and providing our services.
+				</p>
+			</div>
+		</div>
+
+		<!-- Submit Button -->
+		<button
+			type="submit"
+			id="submit-btn"
+			class="w-full px-6 py-3 border-2 border-black rounded-lg text-black font-semibold hover:bg-black hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
+		>
+			<span id="submit-text">Submit</span>
+			<span id="submit-loading" class="hidden">Submitting...</span>
+		</button>
+	</form>
+	
+	<!-- Error Message -->
+	<div id="form-error" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+		<p>There was an error submitting your form. Please try again or contact us directly.</p>
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Form submission
+		const form = document.getElementById('contact-form') as HTMLFormElement;
+		const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+		const submitText = document.getElementById('submit-text') as HTMLElement;
+		const submitLoading = document.getElementById('submit-loading') as HTMLElement;
+		const formError = document.getElementById('form-error') as HTMLElement;
+
+		if (!form || !submitBtn || !submitText || !submitLoading || !formError) {
+			return;
+		}
+
+		// Replace with your n8n webhook URL
+		// Option 1: Set environment variable PUBLIC_N8N_WEBHOOK_URL in .env file
+		// Option 2: Replace 'YOUR_N8N_WEBHOOK_URL_HERE' with your actual webhook URL
+		const N8N_WEBHOOK_URL = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'YOUR_N8N_WEBHOOK_URL_HERE';
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Check if webhook URL is configured
+			if (N8N_WEBHOOK_URL === 'YOUR_N8N_WEBHOOK_URL_HERE') {
+				formError.textContent = 'Form submission is not configured. Please contact the site administrator.';
+				formError.classList.remove('hidden');
+				console.error('N8N webhook URL not configured. Please set PUBLIC_N8N_WEBHOOK_URL or update the code.');
+				return;
+			}
+
+			// Validate email confirmation
+			const email = (form.querySelector('#email') as HTMLInputElement).value;
+			const confirmEmail = (form.querySelector('#confirmEmail') as HTMLInputElement).value;
+
+			if (email !== confirmEmail) {
+				formError.textContent = 'Email addresses do not match. Please check and try again.';
+				formError.classList.remove('hidden');
+				return;
+			}
+
+			// Disable submit button
+			submitBtn.disabled = true;
+			submitText.classList.add('hidden');
+			submitLoading.classList.remove('hidden');
+			formError.classList.add('hidden');
+
+			// Collect form data
+			const formData = new FormData(form);
+			const data: Record<string, string> = {};
+
+			formData.forEach((value, key) => {
+				data[key] = value.toString();
+			});
+
+			// Generate random reference number (MGG-############)
+			const randomDigits = Math.floor(100000000000 + Math.random() * 900000000000).toString();
+			data.referenceNumber = `MGG-${randomDigits}`;
+
+			// Add timestamp in South African time (SAST, UTC+2)
+			const now = new Date();
+			// Get SAST time components using Intl.DateTimeFormat
+			const saFormatter = new Intl.DateTimeFormat('en-CA', {
+				timeZone: 'Africa/Johannesburg',
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				second: '2-digit',
+				hour12: false
+			});
+			
+			const parts = saFormatter.formatToParts(now);
+			const year = parts.find(p => p.type === 'year')?.value;
+			const month = parts.find(p => p.type === 'month')?.value;
+			const day = parts.find(p => p.type === 'day')?.value;
+			const hour = parts.find(p => p.type === 'hour')?.value;
+			const minute = parts.find(p => p.type === 'minute')?.value;
+			const second = parts.find(p => p.type === 'second')?.value;
+			const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+			
+			data.submittedAt = `${year}-${month}-${day}T${hour}:${minute}:${second}.${milliseconds}+02:00`;
+
+			// Add the page URL where the form was submitted
+			data.submittedFromUrl = window.location.href;
+			
+			// Add referrer URL (page user came from before the form page)
+			data.referrerUrl = document.referrer || 'Direct access';
+
+			// Store form data in sessionStorage for thank-you page
+			sessionStorage.setItem('formSubmission', JSON.stringify(data));
+
+			try {
+				// Send to n8n webhook
+				const response = await fetch(N8N_WEBHOOK_URL, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				});
+
+				if (!response.ok) {
+					throw new Error('Failed to submit form');
+				}
+
+				// Redirect to thank-you page
+				window.location.href = '/thank-you';
+			} catch (error) {
+				console.error('Form submission error:', error);
+				formError.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitText.classList.remove('hidden');
+				submitLoading.classList.add('hidden');
+			}
+		});
+	});
+</script>
+

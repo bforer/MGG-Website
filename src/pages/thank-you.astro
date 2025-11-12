@@ -1,0 +1,177 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+---
+
+<Base
+	title="Thank You — MGG"
+	description="Thank you for contacting MGG. We'll get back to you soon."
+>
+	<section class="bg-white py-20 md:py-32">
+		<div class="container">
+			<div class="max-w-3xl mx-auto">
+				<div class="text-center mb-12">
+					<h1 class="text-4xl md:text-5xl font-bold text-black mb-4">Thank You!</h1>
+					<p class="text-lg md:text-xl text-black/70">
+						We've received your message and will get back to you soon.
+					</p>
+				</div>
+
+				<!-- Form Summary -->
+				<div id="form-summary" class="bg-gray-50 rounded-lg p-6 md:p-8 mb-8">
+					<h2 class="text-2xl font-bold text-black mb-6">Submission Summary</h2>
+					<div id="summary-content" class="space-y-4 text-black">
+						<!-- Summary will be populated by JavaScript -->
+					</div>
+				</div>
+
+				<!-- Action Buttons -->
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a
+						href="/"
+						class="px-8 py-3 border-2 border-black rounded-lg text-black font-semibold hover:bg-black hover:text-white transition-colors duration-200 text-center"
+					>
+						Return to Homepage
+					</a>
+					<a
+						href="/lets-connect"
+						class="px-8 py-3 border-2 border-black rounded-lg text-black font-semibold hover:bg-black hover:text-white transition-colors duration-200 text-center"
+					>
+						Send Another Message
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const summaryContent = document.getElementById('summary-content');
+		const formSummary = document.getElementById('form-summary');
+		
+		// Get form data from sessionStorage
+		const formDataStr = sessionStorage.getItem('formSubmission');
+		
+		if (!formDataStr) {
+			// No form data found, redirect to contact page
+			window.location.href = '/lets-connect';
+			return;
+		}
+
+		try {
+			const formData = JSON.parse(formDataStr);
+			
+			// Field labels mapping
+			const fieldLabels: Record<string, string> = {
+				referenceNumber: 'Reference Number',
+				firstName: 'First Name',
+				lastName: 'Last Name',
+				email: 'Email Address',
+				confirmEmail: 'Confirm Email',
+				contactNumber: 'Contact Number',
+				companyName: 'Company Name',
+				branch: 'Branch',
+				startDate: 'Start Date',
+				endDate: 'End Date',
+				numberOfDays: 'Number of Days',
+				message: 'Message',
+				disclaimerCheck: 'Disclaimer Accepted',
+				submittedAt: 'Submitted At',
+				submittedFromUrl: 'Submitted From',
+				referrerUrl: 'Referrer URL'
+			};
+
+			// Branch display names
+			const branchNames: Record<string, string> = {
+				'johannesburg': 'Johannesburg',
+				'cape-town': 'Cape Town'
+			};
+
+			// Format date for display
+			const formatDate = (dateStr: string) => {
+				if (!dateStr) return 'Not provided';
+				const date = new Date(dateStr);
+				return date.toLocaleDateString('en-US', { 
+					year: 'numeric', 
+					month: 'long', 
+					day: 'numeric' 
+				});
+			};
+
+			// Build summary HTML
+			let summaryHTML = '';
+			
+			// Separate reference number to display first
+			const referenceNumber = formData.referenceNumber;
+			const otherFields = Object.entries(formData).filter(([key]) => key !== 'referenceNumber');
+			
+			// Display reference number first if it exists
+			if (referenceNumber) {
+				summaryHTML += `
+					<div class="border-b-2 border-black pb-4 mb-4">
+						<dt class="font-bold text-lg text-black mb-1">Reference Number:</dt>
+						<dd class="text-black font-semibold text-lg">${referenceNumber}</dd>
+					</div>
+				`;
+			}
+			
+			// Display other fields
+			otherFields.forEach(([key, value]) => {
+				// Skip empty values
+				if (!value || value === '') return;
+				
+				const label = fieldLabels[key] || key;
+				let displayValue: string;
+
+				// Format special fields
+				if (key === 'branch') {
+					displayValue = branchNames[value as string] || value as string;
+				} else if (key === 'startDate' || key === 'endDate') {
+					displayValue = formatDate(value as string);
+				} else if (key === 'disclaimerCheck') {
+					displayValue = 'Yes';
+				} else if (key === 'submittedAt') {
+					// Format timestamp (already in SAST, just format for display)
+					const date = new Date(value as string);
+					displayValue = date.toLocaleString('en-ZA', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+						hour: '2-digit',
+						minute: '2-digit',
+						second: '2-digit',
+						timeZone: 'Africa/Johannesburg',
+						timeZoneName: 'short'
+					});
+				} else {
+					displayValue = value as string;
+				}
+
+				// Special handling for URLs to make them clickable links
+				const valueHTML = (key === 'referrerUrl' || key === 'submittedFromUrl') && displayValue && displayValue !== '' && displayValue !== 'Direct access'
+					? `<a href="${displayValue}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">${displayValue}</a>`
+					: displayValue;
+
+				summaryHTML += `
+					<div class="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+						<dt class="font-semibold text-black mb-1">${label}:</dt>
+						<dd class="text-black/70">${valueHTML}</dd>
+					</div>
+				`;
+			});
+
+			if (summaryHTML) {
+				summaryContent!.innerHTML = summaryHTML;
+			} else {
+				formSummary!.style.display = 'none';
+			}
+
+			// Clear sessionStorage after displaying
+			sessionStorage.removeItem('formSubmission');
+		} catch (error) {
+			console.error('Error parsing form data:', error);
+			formSummary!.style.display = 'none';
+		}
+	});
+</script>
+
