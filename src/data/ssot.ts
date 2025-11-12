@@ -6,6 +6,33 @@ export type ServiceItem = {
 	bgColor: string; // Tailwind class for solid background color
 };
 
+export type StaffMember = {
+	name: string;
+	role: string;
+	email: string;
+	cell: string;
+};
+
+export type BranchData = {
+	name: string;
+	location: {
+		address: string[];
+		gpsCoordinates?: {
+			latitude: number;
+			longitude: number;
+		};
+	};
+	contact: {
+		landline?: string;
+		staff: StaffMember[];
+	};
+	companyInfo: {
+		postalAddress?: string;
+		vat?: string;
+		registration?: string;
+	};
+};
+
 export type OrganizationData = {
 	name: string;
 	url: string;
@@ -19,6 +46,10 @@ export type OrganizationData = {
 		email?: string;
 		telephone?: string;
 	};
+	branches: {
+		johannesburg: BranchData;
+		capeTown: BranchData;
+	};
 };
 
 export const organization: OrganizationData = {
@@ -27,14 +58,109 @@ export const organization: OrganizationData = {
 	logo: "/logo.png",
 	socialMedia: {
 		// Add social media URLs here when available
-		// facebook: 'https://www.facebook.com/mgg',
-		// instagram: 'https://www.instagram.com/mgg',
-		// linkedin: 'https://www.linkedin.com/company/mgg',
+		facebook: "https://www.facebook.com/MGGprod",
+		instagram: "https://www.instagram.com/mgg_productions/",
+		linkedin: "https://www.linkedin.com/company/mgg-productions/"
 	},
 	contact: {
 		// Add contact information here when available
 		// email: 'info@mgg.co.za',
 		// telephone: '+27-XX-XXX-XXXX',
+	},
+	branches: {
+		johannesburg: {
+			name: "Johannesburg Branch",
+			location: {
+				address: [
+					"Unit A Linbro Crossing",
+					"12 3rd Road, Linbro Park",
+					"Marlboro",
+					"Gauteng, 2065"
+				],
+				gpsCoordinates: {
+					latitude: -26.083389,
+					longitude: 28.118846
+				}
+			},
+			contact: {
+				landline: "011 608 4094",
+				staff: [
+					{
+						name: "Portia Simelane",
+						role: "Rental and Operations Manager",
+						email: "portia@mgg.co.za",
+						cell: "084 326 1638"
+					},
+					{
+						name: "Rianda Van Burick",
+						role: "Rental and Operations Manager",
+						email: "rianda@mgg.co.za",
+						cell: "084 226 1637"
+					},
+					{
+						name: "Herman Erasmus",
+						role: "Operations and Logistics Manager",
+						email: "herman@mgg.co.za",
+						cell: "084 226 1636"
+					},
+					{
+						name: "Nardus de Lange",
+						role: "Technical Manager",
+						email: "nardus@mgg.co.za",
+						cell: "060 970 5804"
+					},
+					{
+						name: "Andre Matthysen",
+						role: "Head of Fabrication",
+						email: "andre@mgg.co.za",
+						cell: "081 798 1033"
+					},
+					{
+						name: "Karen Benadie",
+						role: "Design",
+						email: "karen@mgg.co.za",
+						cell: "084 400 3630"
+					}
+				]
+			},
+			companyInfo: {
+				postalAddress: "PO Box 79588, Senderwood, 2145",
+				vat: "4720191610",
+				registration: "2015/105314/07"
+			}
+		},
+		capeTown: {
+			name: "Cape Town Branch",
+			location: {
+				address: [
+					"Unit 1 Concorde Park",
+					"Concorde Crescent",
+					"Airport City, 7490"
+				],
+				gpsCoordinates: {
+					latitude: -33.924868,
+					longitude: 18.424055
+				}
+			},
+			contact: {
+				landline: "021 815 9880",
+				staff: [
+					{
+						name: "Francois Lubbe",
+						role: "Coastal Branch Manager",
+						email: "francois@mgg.co.za",
+						cell: "082 787 7594"
+					},
+					{
+						name: "Janine Kruger",
+						role: "Office Administrator",
+						email: "janine@mgg.co.za",
+						cell: "066 194 7585"
+					}
+				]
+			},
+			companyInfo: {}
+		}
 	}
 };
 

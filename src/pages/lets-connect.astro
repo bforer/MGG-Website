@@ -2,6 +2,10 @@
 import Base from '../layouts/BaseLayout.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { siteConfig } from '../data/seo';
+import { organization } from '../data/ssot';
+
+const jhbBranch = organization.branches.johannesburg;
+const cptBranch = organization.branches.capeTown;
 ---
 
 <Base
@@ -15,98 +19,126 @@ import { siteConfig } from '../data/seo';
 			<div class="grid lg:grid-cols-2 gap-12">
 				<!-- Left Column: Branch Information -->
 				<div>
-					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Johannesburg Branch</h2>
+					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg Branch</h2>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4 mb-12">
 						<!-- Location Accordion -->
 						<div class="border-b border-gray-200">
 							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
+								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+								aria-expanded="false"
 							>
-								<span>LOCATION</span>
-								<span class="text-xl">+</span>
+								<span class="font-bold">Location</span>
+								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
 							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Address details for Johannesburg branch</p>
+							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out">
+								<div class="pb-4 text-black">
+									{jhbBranch.location.address.map((line) => (
+										<p>{line}</p>
+									))}
+								</div>
 							</div>
 						</div>
 
 						<!-- Contact Accordion -->
 						<div class="border-b border-gray-200">
 							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
+								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+								aria-expanded="false"
 							>
-								<span>CONTACT</span>
-								<span class="text-xl">+</span>
+								<span class="font-bold">Contact</span>
+								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
 							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Phone: +27 XX XXX XXXX</p>
-								<p>Email: jhb@mgg.co.za</p>
+							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+								<div class="pb-4 text-black space-y-3">
+									{jhbBranch.contact.landline && (
+										<p><strong>Landline:</strong> {jhbBranch.contact.landline}</p>
+									)}
+									<div class="space-y-2">
+										{jhbBranch.contact.staff.map((member) => (
+											<div class="">
+												<p><strong>{member.name}</strong> - {member.role}</p>
+												<p>Email: <a href={`mailto:${member.email}`} class="underline">{member.email}</a></p>
+												<p>Cell: {member.cell}</p>
+											</div>
+										))}
+									</div>
+								</div>
 							</div>
 						</div>
 
 						<!-- Company Info Accordion -->
 						<div class="border-b border-gray-200">
 							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
+								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+								aria-expanded="false"
 							>
-								<span>COMPANY INFO</span>
-								<span class="text-xl">+</span>
+								<span class="font-bold">Company Info</span>
+								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
 							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Company information for Johannesburg branch</p>
+							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+								<div class="pb-4 text-black space-y-2">
+									{jhbBranch.companyInfo.postalAddress && (
+										<p><strong>Postal Address:</strong> {jhbBranch.companyInfo.postalAddress}</p>
+									)}
+									{jhbBranch.companyInfo.vat && (
+										<p><strong>VAT:</strong> {jhbBranch.companyInfo.vat}</p>
+									)}
+									{jhbBranch.companyInfo.registration && (
+										<p><strong>Registration:</strong> {jhbBranch.companyInfo.registration}</p>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Cape Town Branch</h2>
+					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Cape Town Branch</h2>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4">
 						<!-- Location Accordion -->
 						<div class="border-b border-gray-200">
 							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
+								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+								aria-expanded="false"
 							>
-								<span>LOCATION</span>
-								<span class="text-xl">+</span>
+								<span class="font-bold">Location</span>
+								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
 							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Address details for Cape Town branch</p>
+							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+								<div class="pb-4 text-black">
+									{cptBranch.location.address.map((line) => (
+										<p>{line}</p>
+									))}
+								</div>
 							</div>
 						</div>
 
 						<!-- Contact Accordion -->
 						<div class="border-b border-gray-200">
 							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
+								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+								aria-expanded="false"
 							>
-								<span>CONTACT</span>
-								<span class="text-xl">+</span>
+								<span class="font-bold">Contact</span>
+								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
 							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Phone: +27 XX XXX XXXX</p>
-								<p>Email: cpt@mgg.co.za</p>
-							</div>
-						</div>
-
-						<!-- Company Info Accordion -->
-						<div class="border-b border-gray-200">
-							<button
-								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
-								onclick="this.nextElementSibling.classList.toggle('hidden')"
-							>
-								<span>COMPANY INFO</span>
-								<span class="text-xl">+</span>
-							</button>
-							<div class="hidden pb-4 text-black">
-								<p>Company information for Cape Town branch</p>
+							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+								<div class="pb-4 text-black space-y-3">
+									{cptBranch.contact.landline && (
+										<p><strong>Landline:</strong> {cptBranch.contact.landline}</p>
+									)}
+									<div class="space-y-2">
+										{cptBranch.contact.staff.map((member) => (
+											<div class="">
+												<p><strong>{member.name}</strong> - {member.role}</p>
+												<p>Email: <a href={`mailto:${member.email}`} class="underline">{member.email}</a></p>
+												<p>Cell: {member.cell}</p>
+											</div>
+										))}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -114,7 +146,7 @@ import { siteConfig } from '../data/seo';
 
 				<!-- Right Column: Contact Form -->
 				<div>
-					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Get in touch</h2>
+					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Get in touch</h2>
 					
 					<form
 						class="space-y-6"
@@ -123,91 +155,91 @@ import { siteConfig } from '../data/seo';
 					>
 						<!-- First Name -->
 						<div>
-							<label for="firstName" class="sr-only">FIRST NAME</label>
+							<label for="firstName" class="sr-only">First Name</label>
 							<input
 								type="text"
 								id="firstName"
 								name="firstName"
-								placeholder="FIRST NAME"
+								placeholder="First Name"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Last Name -->
 						<div>
-							<label for="lastName" class="sr-only">LAST NAME</label>
+							<label for="lastName" class="sr-only">Last Name</label>
 							<input
 								type="text"
 								id="lastName"
 								name="lastName"
-								placeholder="LAST NAME"
+								placeholder="Last Name"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Email -->
 						<div>
-							<label for="email" class="sr-only">EMAIL ADDRESS</label>
+							<label for="email" class="sr-only">Email Address</label>
 							<input
 								type="email"
 								id="email"
 								name="email"
-								placeholder="EMAIL ADDRESS"
+								placeholder="Email Address"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Confirm Email -->
 						<div>
-							<label for="confirmEmail" class="sr-only">CONFIRM YOUR EMAIL ADDRESS</label>
+							<label for="confirmEmail" class="sr-only">Confirm Your Email Address</label>
 							<input
 								type="email"
 								id="confirmEmail"
 								name="confirmEmail"
-								placeholder="CONFIRM YOUR EMAIL ADDRESS"
+								placeholder="Confirm Your Email Address"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Contact Number -->
 						<div>
-							<label for="contactNumber" class="sr-only">CONTACT NUMBER</label>
+							<label for="contactNumber" class="sr-only">Contact Number</label>
 							<input
 								type="tel"
 								id="contactNumber"
 								name="contactNumber"
-								placeholder="CONTACT NUMBER"
+								placeholder="Contact Number"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Company Name -->
 						<div>
-							<label for="companyName" class="sr-only">COMPANY NAME</label>
+							<label for="companyName" class="sr-only">Company Name</label>
 							<input
 								type="text"
 								id="companyName"
 								name="companyName"
-								placeholder="COMPANY NAME"
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								placeholder="Company Name"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 						</div>
 
 						<!-- Branch Selection -->
 						<div>
-							<label for="branch" class="sr-only">SELECT A BRANCH</label>
+							<label for="branch" class="sr-only">Select a Branch</label>
 							<select
 								id="branch"
 								name="branch"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black uppercase focus:outline-none focus:border-black appearance-none bg-white"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:border-black appearance-none bg-white"
 							>
-								<option value="">SELECT A BRANCH</option>
+								<option value="">Select a Branch</option>
 								<option value="johannesburg">Johannesburg</option>
 								<option value="cape-town">Cape Town</option>
 							</select>
@@ -216,36 +248,36 @@ import { siteConfig } from '../data/seo';
 						<!-- Date Fields -->
 						<div class="grid grid-cols-2 gap-4">
 							<div>
-								<label for="startDate" class="sr-only">START DATE</label>
+								<label for="startDate" class="sr-only">Start Date</label>
 								<input
 									type="date"
 									id="startDate"
 									name="startDate"
-									placeholder="START DATE"
-									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+									placeholder="Start Date"
+									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 								/>
 							</div>
 							<div>
-								<label for="endDate" class="sr-only">END DATE</label>
+								<label for="endDate" class="sr-only">End Date</label>
 								<input
 									type="date"
 									id="endDate"
 									name="endDate"
-									placeholder="END DATE"
-									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+									placeholder="End Date"
+									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 								/>
 							</div>
 						</div>
 
 						<!-- Number of Days -->
 						<div>
-							<label for="numberOfDays" class="sr-only">NUMBER OF DAYS</label>
+							<label for="numberOfDays" class="sr-only">Number of Days</label>
 							<input
 								type="number"
 								id="numberOfDays"
 								name="numberOfDays"
-								placeholder="NUMBER OF DAYS"
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								placeholder="Number of Days"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black"
 							/>
 							<p class="mt-2 text-sm text-black">
 								Please enter the number of days in total that you will be renting the equipment for.
@@ -254,14 +286,14 @@ import { siteConfig } from '../data/seo';
 
 						<!-- Message -->
 						<div>
-							<label for="message" class="sr-only">MESSAGE</label>
+							<label for="message" class="sr-only">Message</label>
 							<textarea
 								id="message"
 								name="message"
 								rows="6"
-								placeholder="MESSAGE"
+								placeholder="Message"
 								required
-								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black resize-y"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:border-black resize-y"
 							></textarea>
 						</div>
 
@@ -300,4 +332,54 @@ import { siteConfig } from '../data/seo';
 		</div>
 	</section>
 </Base>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const accordionButtons = document.querySelectorAll('.accordion-btn');
+		
+		accordionButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const content = button.nextElementSibling as HTMLElement;
+				const icon = button.querySelector('.accordion-icon') as HTMLElement;
+				const isExpanded = button.getAttribute('aria-expanded') === 'true';
+				
+				if (!content || !icon) return;
+				
+				// Toggle aria-expanded
+				button.setAttribute('aria-expanded', String(!isExpanded));
+				
+				if (isExpanded) {
+					// Close accordion
+					icon.style.transform = 'rotate(0deg)';
+					content.style.maxHeight = '0px';
+					content.classList.remove('open');
+				} else {
+					// Open accordion
+					icon.style.transform = 'rotate(45deg)';
+					// Temporarily set to auto to get the actual height
+					content.style.maxHeight = 'none';
+					const height = content.scrollHeight;
+					content.style.maxHeight = '0px';
+					// Force reflow
+					content.offsetHeight;
+					// Now animate to the actual height
+					content.style.maxHeight = height + 'px';
+					content.classList.add('open');
+				}
+			});
+		});
+	});
+</script>
+
+<style>
+	.accordion-content {
+		max-height: 0;
+		opacity: 0;
+		transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+	}
+	
+	.accordion-content.open {
+		opacity: 1;
+	}
+</style>
 
