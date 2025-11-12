@@ -3,7 +3,7 @@ export const siteConfig = {
 	title: "MGG — Custom Technical & Staging Experiences",
 	description:
 		"Professional event production services including lighting design, sound engineering, staging, and technical solutions for corporate events, live shows, and custom experiences. Serving Johannesburg, Cape Town, and South Africa.",
-	url: "https://dev.brandboom.co.za/mgg",
+	url: "http://localhost:4321",
 	ogImage: "/og-image.jpg", // 1200x630px recommended
 	twitterHandle: "@MGG",
 	locale: "en_ZA", // South Africa locale

@@ -7,7 +7,6 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"deploy": "npm run build && node deploy.js",
 		"astro": "astro"
 	},
 	"dependencies": {
