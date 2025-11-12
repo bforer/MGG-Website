@@ -84,16 +84,18 @@ import { organization } from '../data/ssot';
 
 	<!-- Disclaimer - Full Width -->
 	<div class="w-full bg-[#f2f2f2]">
-		<button
-			class="w-full px-4 py-4 text-center text-xl font-semibold flex items-center justify-center gap-2"
-			onclick="document.getElementById('disclaimer-content').classList.toggle('hidden')"
-		>
+	<button
+		id="disclaimer-toggle"
+		class="w-full px-4 py-4 text-center text-xl font-semibold flex items-center justify-center gap-2"
+		aria-expanded="false"
+		aria-controls="disclaimer-content"
+	>
 			Disclaimer
 			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 			</svg>
 		</button>
-		<div id="disclaimer-content" class="hidden pb-6 text-sm text-black/70">
+		<div id="disclaimer-content" class="hidden pb-6 text-sm text-black/70" role="region" aria-labelledby="disclaimer-toggle">
 			<div class="w-full px-6 space-y-4">
 				<!-- Disclaimer content will go here -->
 				<p class="text-sm text-center">
@@ -119,7 +121,20 @@ import { organization } from '../data/ssot';
 			</div>
 		</div>
 	</div>
-
-	
 </footer>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const disclaimerToggle = document.getElementById('disclaimer-toggle');
+		const disclaimerContent = document.getElementById('disclaimer-content');
+		
+		if (disclaimerToggle && disclaimerContent) {
+			disclaimerToggle.addEventListener('click', () => {
+				const isExpanded = disclaimerToggle.getAttribute('aria-expanded') === 'true';
+				disclaimerToggle.setAttribute('aria-expanded', String(!isExpanded));
+				disclaimerContent.classList.toggle('hidden');
+			});
+		}
+	});
+</script>
 

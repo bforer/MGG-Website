@@ -109,7 +109,7 @@ import { organization } from '../data/ssot';
 		<div class="min-h-full flex flex-col px-6 py-8">
 			<!-- Header with Logo and Close Button -->
 			<div class="flex items-center justify-between mb-12">
-				<a href="/" class="flex items-center" aria-label="MGG Home" onclick="closeMobileMenu()">
+				<a href="/" class="flex items-center" aria-label="MGG Home" data-close-menu>
 					<img
 						src="/brand/mgg-logo.webp"
 						alt="MGG Logo"
@@ -120,7 +120,7 @@ import { organization } from '../data/ssot';
 					id="mobile-menu-close"
 					class="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center text-black hover:bg-black/20 transition"
 					aria-label="Close menu"
-					onclick="closeMobileMenu()"
+					data-close-menu
 				>
 					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -135,7 +135,7 @@ import { organization } from '../data/ssot';
 						<a
 							href="/"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
-							onclick="closeMobileMenu()"
+							data-close-menu
 						>
 							{isActive('/') && (
 								<div
@@ -151,7 +151,7 @@ import { organization } from '../data/ssot';
 						<a
 							href="/what-we-do"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
-							onclick="closeMobileMenu()"
+							data-close-menu
 						>
 							{isActive('/what-we-do') && (
 								<div
@@ -167,7 +167,7 @@ import { organization } from '../data/ssot';
 						<a
 							href="/look-book"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
-							onclick="closeMobileMenu()"
+							data-close-menu
 						>
 							{isActive('/look-book') && (
 								<div
@@ -183,7 +183,7 @@ import { organization } from '../data/ssot';
 						<a
 							href="/lets-connect"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
-							onclick="closeMobileMenu()"
+							data-close-menu
 						>
 							{(isActive('/lets-connect') || currentPath.includes('#connect')) && (
 								<div
@@ -344,6 +344,11 @@ import { organization } from '../data/ssot';
 			if (e.key === 'Escape' && overlay && !overlay.classList.contains('translate-x-full')) {
 				window.closeMobileMenu();
 			}
+		});
+
+		// Close menu when clicking on links with data-close-menu attribute
+		document.querySelectorAll('[data-close-menu]').forEach((link) => {
+			link.addEventListener('click', window.closeMobileMenu);
 		});
 	});
 </script>

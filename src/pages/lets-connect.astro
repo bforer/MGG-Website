@@ -11,16 +11,74 @@ const cptBranch = organization.branches.capeTown;
 
 <Base
 	title="Let's connect — MGG"
-	description="Get in touch with MGG for your event production needs. Contact our Johannesburg or Cape Town branches."
+	description="Get in touch with MGG for your event production needs. Contact our Johannesburg or Cape Town branches. Professional technical staging, lighting design, and sound engineering services across South Africa."
 	image="/og-lets-connect.jpg"
 >
+	<StructuredData
+		type="BreadcrumbList"
+		data={{
+			itemListElement: [
+				{
+					'@type': 'ListItem',
+					position: 1,
+					name: 'Home',
+					item: siteConfig.url,
+				},
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: 'Let\'s connect',
+					item: `${siteConfig.url}/lets-connect`,
+				},
+			],
+		}}
+	/>
+
+	<StructuredData
+		type="ContactPage"
+		data={{
+			'@type': 'ContactPage',
+			name: 'Contact MGG',
+			description: 'Contact MGG Productions for event production services in Johannesburg and Cape Town, South Africa',
+			mainEntity: [
+				{
+					'@type': 'LocalBusiness',
+					name: `${organization.name} - ${organization.branches.johannesburg.name}`,
+					telephone: organization.branches.johannesburg.contact.landline,
+					email: organization.branches.johannesburg.contact.staff[0]?.email,
+					address: {
+						'@type': 'PostalAddress',
+						streetAddress: organization.branches.johannesburg.location.address.slice(0, -2).join(', '),
+						addressLocality: 'Marlboro',
+						addressRegion: 'Gauteng',
+						postalCode: '2065',
+						addressCountry: 'ZA',
+					},
+				},
+				{
+					'@type': 'LocalBusiness',
+					name: `${organization.name} - ${organization.branches.capeTown.name}`,
+					telephone: organization.branches.capeTown.contact.landline,
+					email: organization.branches.capeTown.contact.staff[0]?.email,
+					address: {
+						'@type': 'PostalAddress',
+						streetAddress: organization.branches.capeTown.location.address.slice(0, -1).join(', '),
+						addressLocality: 'Airport City',
+						addressRegion: 'Western Cape',
+						postalCode: '7490',
+						addressCountry: 'ZA',
+					},
+				},
+			],
+		}}
+	/>
 
 	<section class="bg-white py-12 md:py-16">
 		<div class="container">
 			<div class="grid lg:grid-cols-2 gap-12">
 				<!-- Left Column: Branch Information -->
 				<div>
-					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg Branch</h2>
+					<h1 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg Branch</h1>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4 mb-12">

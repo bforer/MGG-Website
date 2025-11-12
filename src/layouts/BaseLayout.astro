@@ -33,17 +33,29 @@ const {
 				name: organization.name,
 				url: organization.url,
 				logo: new URL(organization.logo, organization.url).toString(),
+				description: siteConfig.description,
+				foundingDate: "2015",
+				address: {
+					'@type': 'PostalAddress',
+					addressCountry: 'ZA',
+					addressRegion: 'Gauteng',
+					addressLocality: 'Johannesburg',
+				},
 				sameAs: [
 					organization.socialMedia.facebook,
 					organization.socialMedia.instagram,
 					organization.socialMedia.linkedin,
 				].filter(Boolean),
-				contactPoint: {
-					'@type': 'ContactPoint',
-					contactType: 'Customer Service',
-					...(organization.contact.email && { email: organization.contact.email }),
-					...(organization.contact.telephone && { telephone: organization.contact.telephone }),
-				},
+				contactPoint: [
+					{
+						'@type': 'ContactPoint',
+						contactType: 'Customer Service',
+						areaServed: 'ZA',
+						availableLanguage: 'English',
+						...(organization.contact.email && { email: organization.contact.email }),
+						...(organization.contact.telephone && { telephone: organization.contact.telephone }),
+					},
+				],
 			}}
 		/>
 
@@ -53,6 +65,8 @@ const {
 			data={{
 				name: siteConfig.name,
 				url: siteConfig.url,
+				description: siteConfig.description,
+				inLanguage: 'en-ZA',
 				potentialAction: {
 					'@type': 'SearchAction',
 					target: {
@@ -60,6 +74,72 @@ const {
 						urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
 					},
 					'query-input': 'required name=search_term_string',
+				},
+			}}
+		/>
+
+		<!-- LocalBusiness Schema for Johannesburg Branch -->
+		<StructuredData
+			type="LocalBusiness"
+			data={{
+				'@type': 'LocalBusiness',
+				name: `${organization.name} - ${organization.branches.johannesburg.name}`,
+				image: new URL(organization.logo, organization.url).toString(),
+				'@id': `${organization.url}#johannesburg`,
+				url: organization.url,
+				telephone: organization.branches.johannesburg.contact.landline,
+				priceRange: '$$',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: organization.branches.johannesburg.location.address.slice(0, -2).join(', '),
+					addressLocality: organization.branches.johannesburg.location.address[organization.branches.johannesburg.location.address.length - 2]?.replace(/^[^,]+,\s*/, '') || 'Marlboro',
+					addressRegion: 'Gauteng',
+					postalCode: organization.branches.johannesburg.location.address[organization.branches.johannesburg.location.address.length - 1]?.match(/\d+/)?.[0] || '2065',
+					addressCountry: 'ZA',
+				},
+				geo: organization.branches.johannesburg.location.gpsCoordinates ? {
+					'@type': 'GeoCoordinates',
+					latitude: organization.branches.johannesburg.location.gpsCoordinates.latitude,
+					longitude: organization.branches.johannesburg.location.gpsCoordinates.longitude,
+				} : undefined,
+				openingHoursSpecification: {
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+					opens: '08:00',
+					closes: '17:00',
+				},
+			}}
+		/>
+
+		<!-- LocalBusiness Schema for Cape Town Branch -->
+		<StructuredData
+			type="LocalBusiness"
+			data={{
+				'@type': 'LocalBusiness',
+				name: `${organization.name} - ${organization.branches.capeTown.name}`,
+				image: new URL(organization.logo, organization.url).toString(),
+				'@id': `${organization.url}#cape-town`,
+				url: organization.url,
+				telephone: organization.branches.capeTown.contact.landline,
+				priceRange: '$$',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: organization.branches.capeTown.location.address.slice(0, -1).join(', '),
+					addressLocality: 'Airport City',
+					addressRegion: 'Western Cape',
+					postalCode: organization.branches.capeTown.location.address[organization.branches.capeTown.location.address.length - 1]?.match(/\d+/)?.[0] || '7490',
+					addressCountry: 'ZA',
+				},
+				geo: organization.branches.capeTown.location.gpsCoordinates ? {
+					'@type': 'GeoCoordinates',
+					latitude: organization.branches.capeTown.location.gpsCoordinates.latitude,
+					longitude: organization.branches.capeTown.location.gpsCoordinates.longitude,
+				} : undefined,
+				openingHoursSpecification: {
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+					opens: '08:00',
+					closes: '17:00',
 				},
 			}}
 		/>

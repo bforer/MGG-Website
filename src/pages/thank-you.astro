@@ -5,6 +5,7 @@ import Base from '../layouts/BaseLayout.astro';
 <Base
 	title="Thank You — MGG"
 	description="Thank you for contacting MGG. We'll get back to you soon."
+	noindex={true}
 >
 	<section class="bg-white py-20 md:py-32">
 		<div class="container">
@@ -147,14 +148,25 @@ import Base from '../layouts/BaseLayout.astro';
 					displayValue = value as string;
 				}
 
+				// Escape HTML to prevent XSS
+				const escapeHtml = (text: string) => {
+					const div = document.createElement('div');
+					div.textContent = text;
+					return div.innerHTML;
+				};
+
 				// Special handling for URLs to make them clickable links
-				const valueHTML = (key === 'referrerUrl' || key === 'submittedFromUrl') && displayValue && displayValue !== '' && displayValue !== 'Direct access'
-					? `<a href="${displayValue}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">${displayValue}</a>`
-					: displayValue;
+				const isUrl = (key === 'referrerUrl' || key === 'submittedFromUrl') && displayValue && displayValue !== '' && displayValue !== 'Direct access';
+				const escapedLabel = escapeHtml(label);
+				const escapedValue = escapeHtml(displayValue);
+				
+				const valueHTML = isUrl
+					? `<a href="${escapeHtml(displayValue)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">${escapedValue}</a>`
+					: escapedValue;
 
 				summaryHTML += `
 					<div class="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
-						<dt class="font-semibold text-black mb-1">${label}:</dt>
+						<dt class="font-semibold text-black mb-1">${escapedLabel}:</dt>
 						<dd class="text-black/70">${valueHTML}</dd>
 					</div>
 				`;

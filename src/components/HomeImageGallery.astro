@@ -40,7 +40,7 @@ const allImagesJson = JSON.stringify(allImages);
 				<img
 					id="home-img-0"
 					src=""
-					alt="MGG Event Production"
+					alt="MGG Event Production - Professional technical staging and event production services"
 					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
 					loading="lazy"
 				/>
@@ -55,7 +55,7 @@ const allImagesJson = JSON.stringify(allImages);
 				<img
 					id="home-img-1"
 					src=""
-					alt="MGG Event Production"
+					alt="MGG Event Production - Professional technical staging and event production services"
 					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
 					loading="lazy"
 				/>
@@ -70,7 +70,7 @@ const allImagesJson = JSON.stringify(allImages);
 				<img
 					id="home-img-2"
 					src=""
-					alt="MGG Event Production"
+					alt="MGG Event Production - Professional technical staging and event production services"
 					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
 					loading="lazy"
 				/>
@@ -85,7 +85,7 @@ const allImagesJson = JSON.stringify(allImages);
 				<img
 					id="home-img-3"
 					src=""
-					alt="MGG Event Production"
+					alt="MGG Event Production - Professional technical staging and event production services"
 					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
 					loading="lazy"
 				/>
@@ -159,7 +159,7 @@ const allImagesJson = JSON.stringify(allImages);
 				const img = document.getElementById('home-img-' + i);
 				if (img && homeImages[i]) {
 					img.src = homeImages[i].url;
-					img.alt = homeImages[i].alt;
+					img.alt = homeImages[i].alt || 'MGG Event Production - Professional technical staging and event production services';
 				}
 			}
 		}

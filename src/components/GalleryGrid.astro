@@ -16,10 +16,17 @@ try {
 			return imageExtensions.includes(ext);
 		})
 		.sort()
-		.map((file) => ({
-			url: `/lookbook/${file}`,
-			alt: file.replace(/\.[^/.]+$/, ''), // Remove extension for alt text
-		}));
+		.map((file) => {
+			const baseName = file.replace(/\.[^/.]+$/, ''); // Remove extension
+			// Create more descriptive alt text
+			const altText = baseName
+				.replace(/[-_]/g, ' ')
+				.replace(/\b\w/g, (l) => l.toUpperCase());
+			return {
+				url: `/lookbook/${file}`,
+				alt: altText ? `${altText} - MGG Event Production Portfolio` : 'MGG Event Production - Professional lighting design, sound engineering, and technical staging',
+			};
+		});
 } catch (error) {
 	console.error('Error reading lookbook directory:', error);
 }

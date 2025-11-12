@@ -35,7 +35,25 @@ const robotsContent = [
 <meta name="title" content={fullTitle} />
 <meta name="description" content={description} />
 <meta name="robots" content={robotsContent} />
+<meta name="author" content={siteConfig.author} />
+{siteConfig.keywords && (
+	<meta name="keywords" content={siteConfig.keywords.join(', ')} />
+)}
+{siteConfig.geo && (
+	<>
+		<meta name="geo.region" content={siteConfig.geo.region} />
+		<meta name="geo.placename" content={siteConfig.geo.placename} />
+		{siteConfig.geo.position && (
+			<>
+				<meta name="geo.position" content={`${siteConfig.geo.position.latitude};${siteConfig.geo.position.longitude}`} />
+				<meta name="ICBM" content={`${siteConfig.geo.position.latitude}, ${siteConfig.geo.position.longitude}`} />
+			</>
+		)}
+	</>
+)}
 <link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="en-za" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
@@ -81,10 +99,15 @@ const robotsContent = [
 <!-- Additional SEO -->
 <meta name="theme-color" content="#0c0c0d" />
 <meta name="format-detection" content="telephone=no" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta name="language" content="English" />
+<meta name="revisit-after" content="7 days" />
+<meta name="distribution" content="global" />
+<meta name="rating" content="general" />
+	<link rel="icon" type="image/jpeg" href="/mgg-favicon.jpg" />
+	<link rel="apple-touch-icon" href="/mgg-favicon.jpg" />
 
-<!-- Preconnect to external domains (if needed) -->
+<!-- Preconnect to external domains -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://use.typekit.net" crossorigin />
 

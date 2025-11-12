@@ -31,19 +31,44 @@ try {
 
 <Base
 	title="Look Book — MGG"
-	description="Browse our portfolio of event production work including lighting design, sound engineering, and technical staging solutions."
+	description="Browse our portfolio of event production work including lighting design, sound engineering, and technical staging solutions. View our gallery of corporate events, live shows, and custom technical experiences."
 	image="/og-lookbook.jpg"
 >
+	<StructuredData
+		type="BreadcrumbList"
+		data={{
+			itemListElement: [
+				{
+					'@type': 'ListItem',
+					position: 1,
+					name: 'Home',
+					item: siteConfig.url,
+				},
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: 'Look Book',
+					item: `${siteConfig.url}/look-book`,
+				},
+			],
+		}}
+	/>
+
 	<StructuredData
 		type="ImageGallery"
 		data={{
 			name: 'MGG Event Production Portfolio',
 			description:
-				'Gallery of event production work and technical staging solutions',
-			image: images.map((img) => ({
+				'Gallery showcasing MGG\'s event production work including professional lighting design, sound engineering, LED displays, video engineering, projection mapping, stage design, and technical staging solutions for corporate events and live shows in South Africa.',
+			about: {
+				'@type': 'Thing',
+				name: 'Event Production Services',
+			},
+			image: images.slice(0, 20).map((img) => ({
 				'@type': 'ImageObject',
 				contentUrl: img.url,
 				description: img.alt,
+				encodingFormat: 'image/webp',
 			})),
 		}}
 	/>
