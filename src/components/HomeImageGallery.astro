@@ -1,0 +1,234 @@
+---
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
+// Read all images from public/lookbook folder
+const lookbookDir = join(process.cwd(), 'public', 'lookbook');
+const imageExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
+
+let allImages: Array<{ url: string; alt: string }> = [];
+
+try {
+	const files = readdirSync(lookbookDir);
+	allImages = files
+		.filter((file) => {
+			const ext = file.toLowerCase().substring(file.lastIndexOf('.'));
+			return imageExtensions.includes(ext);
+		})
+		.sort()
+		.map((file) => ({
+			url: `/lookbook/${file}`,
+			alt: file.replace(/\.[^/.]+$/, ''),
+		}));
+} catch (error) {
+	console.error('Error reading lookbook directory:', error);
+}
+
+const allImagesJson = JSON.stringify(allImages);
+---
+
+<section class="bg-white py-8 md:py-12 pb-0 md:pb-0">
+	<div class="w-full">
+		<div class="grid grid-cols-4 gap-0">
+			<button
+				id="home-img-btn-0"
+				class="group relative overflow-hidden aspect-square cursor-pointer"
+				aria-label="Open image 1"
+				data-index="0"
+				onclick="openHomeModal(0)"
+			>
+				<img
+					id="home-img-0"
+					src=""
+					alt="MGG Event Production"
+					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+					loading="lazy"
+				/>
+			</button>
+			<button
+				id="home-img-btn-1"
+				class="group relative overflow-hidden aspect-square cursor-pointer"
+				aria-label="Open image 2"
+				data-index="1"
+				onclick="openHomeModal(1)"
+			>
+				<img
+					id="home-img-1"
+					src=""
+					alt="MGG Event Production"
+					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+					loading="lazy"
+				/>
+			</button>
+			<button
+				id="home-img-btn-2"
+				class="group relative overflow-hidden aspect-square cursor-pointer"
+				aria-label="Open image 3"
+				data-index="2"
+				onclick="openHomeModal(2)"
+			>
+				<img
+					id="home-img-2"
+					src=""
+					alt="MGG Event Production"
+					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+					loading="lazy"
+				/>
+			</button>
+			<button
+				id="home-img-btn-3"
+				class="group relative overflow-hidden aspect-square cursor-pointer"
+				aria-label="Open image 4"
+				data-index="3"
+				onclick="openHomeModal(3)"
+			>
+				<img
+					id="home-img-3"
+					src=""
+					alt="MGG Event Production"
+					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+					loading="lazy"
+				/>
+			</button>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div
+		id="home-modal"
+		class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-6"
+	>
+		<button
+			id="home-close"
+			class="absolute top-4 right-4 rounded-full border border-white/20 bg-black/50 hover:bg-black/70 px-3 py-1 text-sm text-white transition"
+		>
+			Close
+		</button>
+		
+		<!-- Previous Arrow -->
+		<button
+			id="home-prev"
+			class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white hover:opacity-80 p-3 text-black transition z-10"
+			aria-label="Previous image"
+		>
+			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+			</svg>
+		</button>
+		
+		<!-- Next Arrow -->
+		<button
+			id="home-next"
+			class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white hover:opacity-80 p-3 text-black transition z-10"
+			aria-label="Next image"
+		>
+			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+		
+		<img
+			id="home-img"
+			src=""
+			alt=""
+			class="max-h-[85vh] max-w-[90vw] rounded-xl shadow-2xl"
+		/>
+	</div>
+
+	<script is:inline set:html={`const allLookbookImages = ${allImagesJson};
+		
+		let homeImages = [];
+		const modal = document.getElementById('home-modal');
+		const modalImg = document.getElementById('home-img');
+		const modalClose = document.getElementById('home-close');
+		const modalPrev = document.getElementById('home-prev');
+		const modalNext = document.getElementById('home-next');
+		let currentIndex = 0;
+		let rotationInterval = null;
+
+		// Function to get 4 random images
+		function getRandomImages() {
+			const shuffled = [...allLookbookImages].sort(() => 0.5 - Math.random());
+			return shuffled.slice(0, 4);
+		}
+
+		// Function to update the displayed images
+		function updateDisplayedImages() {
+			homeImages = getRandomImages();
+			for (let i = 0; i < 4; i++) {
+				const img = document.getElementById('home-img-' + i);
+				if (img && homeImages[i]) {
+					img.src = homeImages[i].url;
+					img.alt = homeImages[i].alt;
+				}
+			}
+		}
+
+		// Initialize images on page load
+		updateDisplayedImages();
+
+		// Rotate images every 2 minutes (120000ms)
+		rotationInterval = setInterval(updateDisplayedImages, 120000);
+
+		function updateModalImage(index) {
+			currentIndex = index;
+			modalImg.src = homeImages[index].url;
+			modalImg.alt = homeImages[index].alt;
+		}
+
+		function openHomeModal(index) {
+			currentIndex = index;
+			updateModalImage(index);
+			modal.classList.remove('hidden');
+			modal.classList.add('flex');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeHomeModal() {
+			modal.classList.add('hidden');
+			modal.classList.remove('flex');
+			modalImg.src = '';
+			document.body.style.overflow = '';
+		}
+
+		function nextImage() {
+			currentIndex = (currentIndex + 1) % homeImages.length;
+			updateModalImage(currentIndex);
+		}
+
+		function prevImage() {
+			currentIndex = (currentIndex - 1 + homeImages.length) % homeImages.length;
+			updateModalImage(currentIndex);
+		}
+
+		modalClose?.addEventListener('click', closeHomeModal);
+		modalPrev?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			prevImage();
+		});
+		modalNext?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			nextImage();
+		});
+		
+		modal?.addEventListener('click', (e) => {
+			if (e.target === modal) closeHomeModal();
+		});
+
+		// Keyboard navigation
+		document.addEventListener('keydown', (e) => {
+			if (!modal.classList.contains('hidden')) {
+				if (e.key === 'ArrowLeft') {
+					prevImage();
+				} else if (e.key === 'ArrowRight') {
+					nextImage();
+				} else if (e.key === 'Escape') {
+					closeHomeModal();
+				}
+			}
+		});
+
+		window.openHomeModal = openHomeModal;
+	`} />
+</section>
+

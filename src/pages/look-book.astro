@@ -3,18 +3,30 @@ import Base from '../layouts/BaseLayout.astro';
 import GalleryGrid from '../components/GalleryGrid.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { siteConfig } from '../data/seo';
+import { readdirSync } from 'fs';
+import { join } from 'path';
 
-// Get images for structured data
-const images = Object.entries(
-	import.meta.glob('/src/assets/lookbook/*.{png,jpg,jpeg,webp,gif}', {
-		eager: true,
-		query: '?url',
-		import: 'default',
-	})
-).map(([path, url]) => ({
-	url: new URL(url, siteConfig.url).toString(),
-	alt: path.split('/').pop() || 'MGG Event Production',
-}));
+// Get images for structured data from public/lookbook folder
+const lookbookDir = join(process.cwd(), 'public', 'lookbook');
+const imageExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
+
+let images: Array<{ url: string; alt: string }> = [];
+
+try {
+	const files = readdirSync(lookbookDir);
+	images = files
+		.filter((file) => {
+			const ext = file.toLowerCase().substring(file.lastIndexOf('.'));
+			return imageExtensions.includes(ext);
+		})
+		.sort()
+		.map((file) => ({
+			url: new URL(`/lookbook/${file}`, siteConfig.url).toString(),
+			alt: file.replace(/\.[^/.]+$/, '') || 'MGG Event Production',
+		}));
+} catch (error) {
+	console.error('Error reading lookbook directory:', error);
+}
 ---
 
 <Base

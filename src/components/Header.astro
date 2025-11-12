@@ -11,7 +11,7 @@ import { organization } from '../data/ssot';
 
 <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
 	<nav
-		class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between"
+		class="w-full px-6 py-4 flex items-center justify-between"
 		role="navigation"
 		aria-label="Main navigation"
 	>
@@ -31,13 +31,11 @@ import { organization } from '../data/ssot';
 					href="/"
 				>
 					{isActive('/') && (
-						<img
-							src="/brand/stripe-though.svg"
-							alt=""
+						<div
 							class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 							aria-hidden="true"
-							style="z-index: 0; object-fit: cover; width: 100%;"
-						/>
+							style="z-index: 0;"
+						></div>
 					)}
 					<span class="relative z-10">Home</span>
 				</a>
@@ -49,13 +47,11 @@ import { organization } from '../data/ssot';
 					href="/what-we-do"
 				>
 					{isActive('/what-we-do') && (
-						<img
-							src="/brand/stripe-though.svg"
-							alt=""
+						<div
 							class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 							aria-hidden="true"
-							style="z-index: 0; object-fit: cover; width: 100%;"
-						/>
+							style="z-index: 0;"
+						></div>
 					)}
 					<span class="relative z-10">What we do</span>
 				</a>
@@ -66,13 +62,11 @@ import { organization } from '../data/ssot';
 					href="/look-book"
 				>
 					{isActive('/look-book') && (
-						<img
-							src="/brand/stripe-though.svg"
-							alt=""
+						<div
 							class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 							aria-hidden="true"
-							style="z-index: 0; object-fit: cover; width: 100%;"
-						/>
+							style="z-index: 0;"
+						></div>
 					)}
 					<span class="relative z-10">Look Book</span>
 				</a>
@@ -83,13 +77,11 @@ import { organization } from '../data/ssot';
 					href="/lets-connect"
 				>
 					{(isActive('/lets-connect') || currentPath.includes('#connect')) && (
-						<img
-							src="/brand/stripe-though.svg"
-							alt=""
+						<div
 							class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 							aria-hidden="true"
-							style="z-index: 0; object-fit: cover; width: 100%;"
-						/>
+							style="z-index: 0;"
+						></div>
 					)}
 					<span class="relative z-10">Let's connect</span>
 				</a>
@@ -146,13 +138,11 @@ import { organization } from '../data/ssot';
 							onclick="closeMobileMenu()"
 						>
 							{isActive('/') && (
-								<img
-									src="/brand/stripe-though.svg"
-									alt=""
+								<div
 									class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 									aria-hidden="true"
-									style="z-index: 0; object-fit: cover; width: 100%;"
-								/>
+									style="z-index: 0;"
+								></div>
 							)}
 							<span class="relative z-10">Home</span>
 						</a>
@@ -164,13 +154,11 @@ import { organization } from '../data/ssot';
 							onclick="closeMobileMenu()"
 						>
 							{isActive('/what-we-do') && (
-								<img
-									src="/brand/stripe-though.svg"
-									alt=""
+								<div
 									class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 									aria-hidden="true"
-									style="z-index: 0; object-fit: cover; width: 100%;"
-								/>
+									style="z-index: 0;"
+								></div>
 							)}
 							<span class="relative z-10">What we do</span>
 						</a>
@@ -182,13 +170,11 @@ import { organization } from '../data/ssot';
 							onclick="closeMobileMenu()"
 						>
 							{isActive('/look-book') && (
-								<img
-									src="/brand/stripe-though.svg"
-									alt=""
+								<div
 									class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 									aria-hidden="true"
-									style="z-index: 0; object-fit: cover; width: 100%;"
-								/>
+									style="z-index: 0;"
+								></div>
 							)}
 							<span class="relative z-10">Look Book</span>
 						</a>
@@ -200,13 +186,11 @@ import { organization } from '../data/ssot';
 							onclick="closeMobileMenu()"
 						>
 							{(isActive('/lets-connect') || currentPath.includes('#connect')) && (
-								<img
-									src="/brand/stripe-though.svg"
-									alt=""
+								<div
 									class="absolute bottom-0 left-0 w-full h-3 nav-stripe-active"
 									aria-hidden="true"
-									style="z-index: 0; object-fit: cover; width: 100%;"
-								/>
+									style="z-index: 0;"
+								></div>
 							)}
 							<span class="relative z-10">Let's connect</span>
 						</a>
@@ -376,11 +360,19 @@ import { organization } from '../data/ssot';
 		transform: rotate(-45deg) translate(7px, -6px);
 	}
 	
-	/* Active nav stripe - yellow color */
+	/* Active nav stripe - brand yellow color using CSS variable */
 	.nav-stripe-active {
-		filter: brightness(0) saturate(100%) invert(84%) sepia(100%) saturate(7499%) hue-rotate(359deg) brightness(102%) contrast(102%);
+		background-color: var(--brand-yellow, #ffd700);
+		mask-image: url('/brand/stripe-though.svg');
+		mask-repeat: no-repeat;
+		mask-position: center;
+		mask-size: cover;
+		-webkit-mask-image: url('/brand/stripe-though.svg');
+		-webkit-mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		-webkit-mask-size: cover;
 		width: 100% !important;
-		object-fit: cover !important;
+		height: 0.75rem !important; /* h-3 = 0.75rem */
 	}
 </style>
 

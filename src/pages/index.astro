@@ -3,6 +3,7 @@ import Base from '../layouts/BaseLayout.astro';
 import HeroSplide from '../components/HeroSplide.astro';
 import WhatWeDoIntro from '../components/WhatWeDoIntro.astro';
 import WhatWeDoGrid from '../components/WhatWeDoGrid.astro';
+import HomeImageGallery from '../components/HomeImageGallery.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { services } from '../data/ssot';
 import { siteConfig } from '../data/seo';
@@ -42,8 +43,8 @@ import { siteConfig } from '../data/seo';
 	<HeroSplide />
 	<WhatWeDoIntro />
 	<WhatWeDoGrid items={services} slider={true} />
-	<section class="bg-white py-16">
-		<div class="mx-auto max-w-7xl px-6">
+	<section class="bg-white py-16 pb-0">
+		<div class="container">
 			<p class="text-2xl md:text-3xl lg:text-4xl font-bold text-black">
 				Take a peek at the magic we create. Check out our photo album<a href="/look-book" class="relative inline-block ml-2 align-baseline text-black">
 					<img
@@ -53,12 +54,14 @@ import { siteConfig } from '../data/seo';
 						aria-hidden="true"
 						style="z-index: 0;"
 					/>
-					<span class="relative z-10">here</span>
+					<span class="relative z-10">here.</span>
 				</a>
-				.
+				
 			</p>
 		</div>
 	</section>
+
+	<HomeImageGallery />
 	
 </Base>
 
