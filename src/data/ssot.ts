@@ -54,7 +54,7 @@ export type OrganizationData = {
 
 export const organization: OrganizationData = {
 	name: "MGG",
-	url: "https://www.mgg.co.za",
+	url: "https://dev.brandboom.co.za/mgg",
 	logo: "/brand/mgg-logo.webp",
 	socialMedia: {
 		// Add social media URLs here when available

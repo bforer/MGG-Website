@@ -7,15 +7,18 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
+		"deploy": "npm run build && node deploy.js",
 		"astro": "astro"
 	},
-  "dependencies": {
-    "@splidejs/splide": "^4.1.4",
-    "astro": "^4.15.0"
-  },
+	"dependencies": {
+		"@splidejs/splide": "^4.1.4",
+		"astro": "^4.15.0"
+	},
 	"devDependencies": {
 		"@astrojs/sitemap": "^3.2.0",
 		"@astrojs/tailwind": "^5.1.4",
+		"dotenv": "^16.4.5",
+		"ftp-deploy": "^2.4.3",
 		"tailwindcss": "^3.4.1",
 		"typescript": "^5.4.5"
 	}

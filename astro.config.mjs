@@ -3,7 +3,8 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-	site: "https://www.mgg.co.za", // Replace with your actual domain
+	site: "https://dev.brandboom.co.za", // Development site URL
+	base: "/mgg/", // Base path for subfolder deployment
 	output: "static", // Explicitly set to static (default, but good to be explicit for cPanel/xneelo)
 	integrations: [
 		tailwind(),
@@ -13,7 +14,7 @@ export default defineConfig({
 			lastmod: new Date(),
 			serialize(item) {
 				// Set higher priority for homepage
-				if (item.url === "https://www.mgg.co.za/") {
+				if (item.url === "https://dev.brandboom.co.za/mgg/") {
 					return {
 						...item,
 						priority: 1.0,
