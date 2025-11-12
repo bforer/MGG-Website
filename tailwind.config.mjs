@@ -5,6 +5,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: [
+					'"helvetica-neue-lt-pro"',
 					'"Helvetica Neue"',
 					"Helvetica",
 					"Arial",
@@ -12,6 +13,9 @@ export default {
 					"system-ui",
 					"sans-serif"
 				]
+			},
+			colors: {
+				"brand-yellow": "#FFD700"
 			}
 		}
 	},

@@ -1,0 +1,303 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { siteConfig } from '../data/seo';
+---
+
+<Base
+	title="Let's connect — MGG"
+	description="Get in touch with MGG for your event production needs. Contact our Johannesburg or Cape Town branches."
+	image="/og-lets-connect.jpg"
+>
+
+	<section class="bg-white py-24">
+		<div class="mx-auto max-w-7xl px-6">
+			<div class="grid lg:grid-cols-2 gap-12">
+				<!-- Left Column: Branch Information -->
+				<div>
+					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Johannesburg Branch</h2>
+					
+					<!-- Accordion Items -->
+					<div class="space-y-4 mb-12">
+						<!-- Location Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>LOCATION</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Address details for Johannesburg branch</p>
+							</div>
+						</div>
+
+						<!-- Contact Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>CONTACT</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Phone: +27 XX XXX XXXX</p>
+								<p>Email: jhb@mgg.co.za</p>
+							</div>
+						</div>
+
+						<!-- Company Info Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>COMPANY INFO</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Company information for Johannesburg branch</p>
+							</div>
+						</div>
+					</div>
+
+					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Cape Town Branch</h2>
+					
+					<!-- Accordion Items -->
+					<div class="space-y-4">
+						<!-- Location Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>LOCATION</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Address details for Cape Town branch</p>
+							</div>
+						</div>
+
+						<!-- Contact Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>CONTACT</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Phone: +27 XX XXX XXXX</p>
+								<p>Email: cpt@mgg.co.za</p>
+							</div>
+						</div>
+
+						<!-- Company Info Accordion -->
+						<div class="border-b border-gray-200">
+							<button
+								class="w-full flex items-center justify-between py-4 text-black uppercase text-sm font-medium hover:opacity-80 transition"
+								onclick="this.nextElementSibling.classList.toggle('hidden')"
+							>
+								<span>COMPANY INFO</span>
+								<span class="text-xl">+</span>
+							</button>
+							<div class="hidden pb-4 text-black">
+								<p>Company information for Cape Town branch</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right Column: Contact Form -->
+				<div>
+					<h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Get in touch</h2>
+					
+					<form
+						class="space-y-6"
+						action="#"
+						method="POST"
+					>
+						<!-- First Name -->
+						<div>
+							<label for="firstName" class="sr-only">FIRST NAME</label>
+							<input
+								type="text"
+								id="firstName"
+								name="firstName"
+								placeholder="FIRST NAME"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Last Name -->
+						<div>
+							<label for="lastName" class="sr-only">LAST NAME</label>
+							<input
+								type="text"
+								id="lastName"
+								name="lastName"
+								placeholder="LAST NAME"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Email -->
+						<div>
+							<label for="email" class="sr-only">EMAIL ADDRESS</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								placeholder="EMAIL ADDRESS"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Confirm Email -->
+						<div>
+							<label for="confirmEmail" class="sr-only">CONFIRM YOUR EMAIL ADDRESS</label>
+							<input
+								type="email"
+								id="confirmEmail"
+								name="confirmEmail"
+								placeholder="CONFIRM YOUR EMAIL ADDRESS"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Contact Number -->
+						<div>
+							<label for="contactNumber" class="sr-only">CONTACT NUMBER</label>
+							<input
+								type="tel"
+								id="contactNumber"
+								name="contactNumber"
+								placeholder="CONTACT NUMBER"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Company Name -->
+						<div>
+							<label for="companyName" class="sr-only">COMPANY NAME</label>
+							<input
+								type="text"
+								id="companyName"
+								name="companyName"
+								placeholder="COMPANY NAME"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+						</div>
+
+						<!-- Branch Selection -->
+						<div>
+							<label for="branch" class="sr-only">SELECT A BRANCH</label>
+							<select
+								id="branch"
+								name="branch"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black uppercase focus:outline-none focus:border-black appearance-none bg-white"
+							>
+								<option value="">SELECT A BRANCH</option>
+								<option value="johannesburg">Johannesburg</option>
+								<option value="cape-town">Cape Town</option>
+							</select>
+						</div>
+
+						<!-- Date Fields -->
+						<div class="grid grid-cols-2 gap-4">
+							<div>
+								<label for="startDate" class="sr-only">START DATE</label>
+								<input
+									type="date"
+									id="startDate"
+									name="startDate"
+									placeholder="START DATE"
+									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								/>
+							</div>
+							<div>
+								<label for="endDate" class="sr-only">END DATE</label>
+								<input
+									type="date"
+									id="endDate"
+									name="endDate"
+									placeholder="END DATE"
+									class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+								/>
+							</div>
+						</div>
+
+						<!-- Number of Days -->
+						<div>
+							<label for="numberOfDays" class="sr-only">NUMBER OF DAYS</label>
+							<input
+								type="number"
+								id="numberOfDays"
+								name="numberOfDays"
+								placeholder="NUMBER OF DAYS"
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black"
+							/>
+							<p class="mt-2 text-sm text-black">
+								Please enter the number of days in total that you will be renting the equipment for.
+							</p>
+						</div>
+
+						<!-- Message -->
+						<div>
+							<label for="message" class="sr-only">MESSAGE</label>
+							<textarea
+								id="message"
+								name="message"
+								rows="6"
+								placeholder="MESSAGE"
+								required
+								class="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 uppercase focus:outline-none focus:border-black resize-y"
+							></textarea>
+						</div>
+
+						<!-- Disclaimer -->
+						<div class="space-y-4">
+							<h3 class="text-black font-bold">Disclaimer *</h3>
+							<div class="flex items-start gap-3">
+								<input
+									type="checkbox"
+									id="disclaimerCheck"
+									name="disclaimerCheck"
+									required
+									class="mt-1 w-4 h-4 border border-black rounded"
+								/>
+								<label for="disclaimerCheck" class="text-black text-sm">
+									I have read the below disclaimer
+								</label>
+							</div>
+							<div class="text-black text-sm leading-relaxed">
+								<p>
+									By submitting this form, you consent to MGG processing your personal information in accordance with the Protection of Personal Information Act (POPIA). Your information will be used solely for the purpose of responding to your inquiry and providing our services.
+								</p>
+							</div>
+						</div>
+
+						<!-- Submit Button -->
+						<button
+							type="submit"
+							class="w-full px-6 py-3 border-2 border-black rounded-lg text-black font-semibold hover:bg-black hover:text-white transition"
+						>
+							Submit
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</Base>
+

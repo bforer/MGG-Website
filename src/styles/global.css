@@ -3,14 +3,42 @@
 @tailwind utilities;
 
 :root {
-	--bg: #0c0c0d;
+	--bg: #000000;
 	--ink: #ffffff;
 	--ink-muted: rgba(255, 255, 255, 0.75);
+	--brand-yellow: #ffd700;
 }
 
 html,
 body {
 	background: var(--bg);
 	color: var(--ink);
+	font-family: "helvetica-neue-lt-pro", "Helvetica Neue", Helvetica, Arial,
+		ui-sans-serif, system-ui, sans-serif;
 	font-feature-settings: "liga" 1, "kern" 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero slider pagination dots - white */
+.splide__pagination__page {
+	background: white !important;
+	background-color: white !important;
+	opacity: 0.5 !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+.splide__pagination__page.is-active {
+	background: white !important;
+	background-color: white !important;
+	opacity: 1 !important;
+}
+.splide__pagination__page::before {
+	background: white !important;
+	background-color: white !important;
+}
+.splide__pagination__page:hover {
+	background: white !important;
+	background-color: white !important;
+	opacity: 0.8 !important;
 }

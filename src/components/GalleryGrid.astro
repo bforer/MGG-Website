@@ -9,25 +9,27 @@ const images = Object.entries(
 const imagesJson = JSON.stringify(images);
 ---
 
-<section class="mx-auto max-w-7xl px-6 py-24">
-	<h2 class="text-3xl md:text-4xl font-semibold mb-10">Look Book</h2>
+<section class="bg-white py-24">
+	<div class="mx-auto max-w-7xl px-6">
+		<h2 class="text-3xl md:text-4xl font-semibold mb-10 text-black">Look Book</h2>
 
-	<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-		{images.map((img, idx) => (
-			<button
-				class="group relative overflow-hidden rounded-xl border border-white/10"
-				aria-label={`Open ${img.alt}`}
-				data-index={idx}
-				onclick={`openModal(${idx})`}
-			>
-				<img
-					src={img.url}
-					alt={img.alt}
-					loading="lazy"
-					class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-				/>
-			</button>
-		))}
+		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+			{images.map((img, idx) => (
+				<button
+					class="group relative overflow-hidden rounded-xl border border-gray-200"
+					aria-label={`Open ${img.alt}`}
+					data-index={idx}
+					onclick={`openModal(${idx})`}
+				>
+					<img
+						src={img.url}
+						alt={img.alt}
+						loading="lazy"
+						class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+					/>
+				</button>
+			))}
+		</div>
 	</div>
 
 	<!-- Modal -->

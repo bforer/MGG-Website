@@ -1,41 +1,322 @@
 ---
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+// Import core Splide CSS (not the theme) for basic structure
+import '@splidejs/splide/dist/css/splide-core.min.css';
 const slides: { src: string; alt?: string }[] = [
-	{ src: '/src/assets/hero/slide-1.jpg', alt: 'Stage Production' },
-	{ src: '/src/assets/hero/slide-2.jpg', alt: 'Corporate Event' },
-	{ src: '/src/assets/hero/slide-3.jpg', alt: 'Live Show' },
+	{ src: '/heroSlider/mgg-main-01.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-02.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-03.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-04.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-05.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-06.webp', alt: 'MGG Event Production' },
+	{ src: '/heroSlider/mgg-main-07.webp', alt: 'MGG Event Production' },
 ];
+const totalSlidesFormatted = String(slides.length).padStart(2, '0');
 ---
 
-<div class="relative">
-	<div class="splide" client:load>
-		<div class="splide__track">
-			<ul class="splide__list">
+<div class="relative h-[calc(100vh-80px)] md:h-[calc(100vh-88px)] bg-gray-900" id="hero-slider-container">
+	<!-- Fallback first image (visible before Splide initializes) -->
+	<img
+		src={slides[0].src}
+		alt={slides[0].alt}
+		class="absolute inset-0 w-full h-full object-cover splide-fallback z-0"
+		loading="eager"
+	/>
+	<div class="splide relative z-10 h-full" id="hero-splide" data-total-slides={slides.length}>
+		<div class="splide__track h-full">
+			<ul class="splide__list h-full">
 				{slides.map((s) => (
-					<li class="splide__slide">
+					<li class="splide__slide relative h-full">
 						<img
 							src={s.src}
 							alt={s.alt}
-							class="w-full h-[60vh] md:h-[80vh] object-cover"
+							class="w-full h-full object-cover"
+							loading="eager"
 						/>
 					</li>
 				))}
 			</ul>
 		</div>
 	</div>
+	
+	<!-- Vertical Pagination (Umbrella Studio Style) -->
+	<div class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-1 md:gap-2 z-40 pointer-events-none" id="vertical-pagination">
+		{slides.map((_, index) => {
+			const slideNumber = String(index + 1).padStart(2, '0');
+			return (
+				<button
+					type="button"
+					class="vertical-pagination-item text-white/50 text-xs md:text-sm font-medium transition-all duration-300 hover:text-white/80 pointer-events-auto cursor-pointer"
+					data-slide-index={index}
+					data-slide-number={slideNumber}
+					aria-label={`Go to slide ${slideNumber}`}
+				>
+					{slideNumber}
+				</button>
+			);
+		})}
+	</div>
+	<!-- Static Opacity overlay above banner, below text -->
+	<div class="absolute inset-0 bg-black/40 z-20 pointer-events-none"></div>
+	<!-- Static Hero Text Overlay -->
+	<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+		<div class="mx-auto max-w-7xl w-full px-6">
+			<div class="flex flex-col md:flex-row items-start gap-2 md:gap-3">
+				<!-- Column 1: 25 SVG -->
+				<div class="flex-shrink-0">
+					<img 
+						src="/brand/25years.svg" 
+						alt="25" 
+						class="h-16 md:h-24 lg:h-32 w-auto"
+					/>
+				</div>
+				<!-- Column 2: Text Content -->
+				<div class="text-left">
+					<h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+						MEMORABLE YEARS.
+					</h1>
+					<h6 class="text-white text-lg md:text-xl mt-4 max-w-2xl">
+						Collaborating with exceptional clients and doing what we love.
+					</h6>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	<script type="module" client:load>
+	<style is:global>
+		/* Full screen hero slider container */
+		#hero-slider-container {
+			width: 100%;
+		}
+		
+		/* Essential Splide slider styles */
+		#hero-splide.splide {
+			visibility: visible;
+			position: relative;
+			height: 100%;
+		}
+		#hero-splide .splide__track {
+			overflow: hidden;
+			position: relative;
+			z-index: 0;
+			height: 100%;
+		}
+		#hero-splide .splide__list {
+			display: flex;
+			height: 100%;
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+		#hero-splide .splide__slide {
+			flex-shrink: 0;
+			list-style-type: none !important;
+			margin: 0;
+			position: relative;
+			height: 100%;
+		}
+		#hero-splide .splide__slide img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		
+		/* Hide default Splide pagination */
+		#hero-splide .splide__pagination {
+			display: none !important;
+		}
+		
+		/* Vertical Pagination Styles */
+		#vertical-pagination {
+			pointer-events: none;
+		}
+		.vertical-pagination-item {
+			line-height: 1.2;
+			padding: 0.125rem 0;
+			background: none;
+			border: none;
+			font-family: inherit;
+		}
+		.vertical-pagination-item.active {
+			color: var(--brand-yellow) !important; /* Brand yellow color */
+			font-weight: 600;
+			opacity: 1 !important;
+			transform: scale(1.1);
+		}
+		
+		/* Arrow styles - positioned at bottom right, below pagination */
+		#hero-splide .splide__arrow {
+			position: absolute !important;
+			z-index: 40 !important;
+			bottom: 1.5rem !important;
+			top: auto !important;
+			transform: none !important;
+			border: none !important;
+			background: transparent !important;
+			color: white !important;
+			width: auto !important;
+			height: auto !important;
+			padding: 0.5rem !important;
+			cursor: pointer !important;
+			transition: opacity 0.2s !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+		}
+		#hero-splide .splide__arrow:hover {
+			opacity: 0.7 !important;
+		}
+		#hero-splide .splide__arrow--prev {
+			right: 3.5rem !important;
+			left: auto !important;
+		}
+		#hero-splide .splide__arrow--next {
+			right: 1.5rem !important;
+			left: auto !important;
+		}
+		
+		/* Responsive adjustments for arrows */
+		@media (max-width: 768px) {
+			#hero-splide .splide__arrow--prev {
+				right: 3rem !important;
+			}
+			#hero-splide .splide__arrow--next {
+				right: 1rem !important;
+			}
+		}
+		#hero-splide .splide__arrow svg {
+			fill: white !important;
+			width: 20px !important;
+			height: 20px !important;
+		}
+		/* Ensure arrows point in correct direction */
+		/* Prev arrow (positioned left) should point left (←), Next arrow (positioned right) should point right (→) */
+		#hero-splide .splide__arrow--prev svg {
+			transform: rotate(180deg) !important; /* Rotate to point left */
+		}
+		#hero-splide .splide__arrow--next svg {
+			transform: none !important; /* Keep pointing right */
+		}
+	</style>
+
+	<script>
 		import Splide from '@splidejs/splide';
-		new Splide('.splide', {
-			type: 'loop',
-			speed: 700,
-			autoplay: true,
-			interval: 4200,
-			pauseOnHover: true,
-			arrows: true,
-			pagination: true,
-			rewind: true,
-		}).mount();
+		
+		let splideInstance: Splide | null = null;
+		
+		function initSplide() {
+			const splideEl = document.getElementById('hero-splide');
+			const sliderContainer = document.getElementById('hero-slider-container');
+			const fallback = document.querySelector('.splide-fallback') as HTMLElement | null;
+			
+			if (!splideEl || splideEl.classList.contains('splide--initialized')) {
+				return;
+			}
+			
+			// Dynamically calculate header height and set slider height
+			const header = document.querySelector('header');
+			if (header && sliderContainer) {
+				const headerHeight = header.offsetHeight;
+				sliderContainer.style.height = `calc(100vh - ${headerHeight}px)`;
+			}
+			
+			// Hide fallback once Splide is ready
+			if (fallback) {
+				fallback.style.display = 'none';
+			}
+			
+			const totalSlides = parseInt(splideEl.getAttribute('data-total-slides') || '7', 10);
+			
+			// Initialize Splide
+			splideInstance = new Splide(splideEl, {
+				type: 'loop',
+				speed: 700,
+				autoplay: true,
+				interval: 4200,
+				pauseOnHover: true,
+				arrows: true,
+				pagination: false, // Disable default pagination
+				rewind: true,
+				keyboard: 'global', // Enable keyboard navigation
+				waitForTransition: false, // Better performance
+			});
+			
+			splideInstance.mount();
+			
+			// Get vertical pagination items
+			const paginationItems = document.querySelectorAll('.vertical-pagination-item');
+			
+			// Function to update vertical pagination
+			const updateVerticalPagination = () => {
+				if (!splideInstance) return;
+				
+				// In loop mode, use the real index from the Controller component
+				// This handles the duplicated slides correctly
+				const realIndex = splideInstance.index;
+				// Normalize to 0-based index within our actual slide count
+				const normalizedIndex = ((realIndex % totalSlides) + totalSlides) % totalSlides;
+				
+				// Update active state for all pagination items
+				paginationItems.forEach((item, index) => {
+					const button = item as HTMLElement;
+					if (index === normalizedIndex) {
+						button.classList.add('active');
+					} else {
+						button.classList.remove('active');
+					}
+				});
+			};
+			
+			// Add click handlers to pagination items
+			paginationItems.forEach((item, index) => {
+				item.addEventListener('click', () => {
+					if (splideInstance) {
+						splideInstance.go(index);
+					}
+				});
+			});
+			
+			// Update on slide change events
+			splideInstance.on('moved', updateVerticalPagination);
+			splideInstance.on('visible', updateVerticalPagination);
+			
+			// Initial update after mount
+			// Use a small delay to ensure Splide is fully initialized
+			setTimeout(updateVerticalPagination, 100);
+		}
+		
+		// Function to update slider height based on header
+		function updateSliderHeight() {
+			const sliderContainer = document.getElementById('hero-slider-container');
+			const header = document.querySelector('header');
+			if (header && sliderContainer) {
+				const headerHeight = header.offsetHeight;
+				sliderContainer.style.height = `calc(100vh - ${headerHeight}px)`;
+			}
+		}
+		
+		// Cleanup function
+		function destroySplide() {
+			if (splideInstance) {
+				splideInstance.destroy();
+				splideInstance = null;
+			}
+		}
+		
+		// Initialize when DOM is ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initSplide);
+		} else {
+			initSplide();
+		}
+		
+		// Update slider height on window resize
+		let resizeTimeout: ReturnType<typeof setTimeout>;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(updateSliderHeight, 100);
+		});
+		
+		// Cleanup on page unload (for SPA navigation if applicable)
+		window.addEventListener('beforeunload', destroySplide);
 	</script>
 </div>
 
