@@ -236,5 +236,13 @@ export const services: ServiceItem[] = [
 			"Precise technical drawings and weight calculations for rigging and structural installations. Our detailed planning ensures safety and compliance with all regulations.",
 		image: "/services/technical-drafting.webp",
 		bgColor: "bg-[#A24512]" // Dark orange/brown
+	},
+	{
+		slug: "power-management-distribution",
+		title: "Power Management + Distribution.",
+		blurb:
+			"Planning and managing power for lighting, sound, video, LED displays, and other systems, ensuring a reliable supply and load balance. Distributing power safely, setting up panels, running cables, and connecting to generators or the grid, while ensuring circuit protection and compliance with standards.",
+		image: "/services/power-management.webp",
+		bgColor: "bg-[#000000]" // Dark orange/brown
 	}
 ];
