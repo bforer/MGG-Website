@@ -7,7 +7,10 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"deploy:temp": "npm run build && node deploy.js temp",
+		"deploy:prod": "npm run build && node deploy.js prod",
+		"deploy": "npm run deploy:temp"
 	},
 	"dependencies": {
 		"@splidejs/splide": "^4.1.4",
