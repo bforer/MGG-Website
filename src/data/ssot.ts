@@ -24,6 +24,7 @@ export type BranchData = {
 	};
 	contact: {
 		landline?: string;
+		email?: string;
 		staff: StaffMember[];
 	};
 	companyInfo: {
@@ -69,7 +70,7 @@ export const organization: OrganizationData = {
 	},
 	branches: {
 		johannesburg: {
-			name: "Johannesburg Branch",
+			name: "Johannesburg",
 			location: {
 				address: [
 					"Unit A Linbro Crossing",
@@ -84,44 +85,8 @@ export const organization: OrganizationData = {
 			},
 			contact: {
 				landline: "011 608 4094",
-				staff: [
-					{
-						name: "Portia Simelane",
-						role: "Rental and Operations Manager",
-						email: "portia@mgg.co.za",
-						cell: "084 326 1638"
-					},
-					{
-						name: "Rianda Van Burick",
-						role: "Rental and Operations Manager",
-						email: "rianda@mgg.co.za",
-						cell: "084 226 1637"
-					},
-					{
-						name: "Herman Erasmus",
-						role: "Operations and Logistics Manager",
-						email: "herman@mgg.co.za",
-						cell: "084 226 1636"
-					},
-					{
-						name: "Nardus de Lange",
-						role: "Technical Manager",
-						email: "nardus@mgg.co.za",
-						cell: "060 970 5804"
-					},
-					{
-						name: "Andre Matthysen",
-						role: "Head of Fabrication",
-						email: "andre@mgg.co.za",
-						cell: "081 798 1033"
-					},
-					{
-						name: "Karen Benadie",
-						role: "Design",
-						email: "karen@mgg.co.za",
-						cell: "084 400 3630"
-					}
-				]
+				email: "info@mgg.co.za",
+				staff: []
 			},
 			companyInfo: {
 				postalAddress: "PO Box 79588, Senderwood, 2145",
@@ -130,7 +95,7 @@ export const organization: OrganizationData = {
 			}
 		},
 		capeTown: {
-			name: "Cape Town Branch",
+			name: "Cape Town",
 			location: {
 				address: [
 					"Unit 1 Concorde Park",
@@ -144,20 +109,8 @@ export const organization: OrganizationData = {
 			},
 			contact: {
 				landline: "021 815 9880",
-				staff: [
-					{
-						name: "Francois Lubbe",
-						role: "Coastal Branch Manager",
-						email: "francois@mgg.co.za",
-						cell: "082 787 7594"
-					},
-					{
-						name: "Janine Kruger",
-						role: "Office Administrator",
-						email: "janine@mgg.co.za",
-						cell: "066 194 7585"
-					}
-				]
+				email: "info@mgg.co.za",
+				staff: []
 			},
 			companyInfo: {}
 		}
@@ -214,10 +167,10 @@ export const services: ServiceItem[] = [
 		bgColor: "bg-[#2D746D]" // Dark blue
 	},
 	{
-		slug: "stage-design-build",
-		title: "Stage Design + Build.",
+		slug: "fabrication-design-installation",
+		title: "Fabrication Design + Installation.",
 		blurb:
-			"Custom stage design and construction services that bring your vision to life. From concept to completion, we build stages that are both functional and visually stunning.",
+			"Bespoke stage, exhibition, and museum display environments, meticulously designed and fabricated from concept to completion. We create refined, high impact spaces where form meets function.",
 		image: "/services/stage-design.webp",
 		bgColor: "bg-[#9E9900]" // Light green/olive
 	},

@@ -45,7 +45,7 @@ const cptBranch = organization.branches.capeTown;
 					'@type': 'LocalBusiness',
 					name: `${organization.name} - ${organization.branches.johannesburg.name}`,
 					telephone: organization.branches.johannesburg.contact.landline,
-					email: organization.branches.johannesburg.contact.staff[0]?.email,
+					email: organization.branches.johannesburg.contact.email,
 					address: {
 						'@type': 'PostalAddress',
 						streetAddress: organization.branches.johannesburg.location.address.slice(0, -2).join(', '),
@@ -59,7 +59,7 @@ const cptBranch = organization.branches.capeTown;
 					'@type': 'LocalBusiness',
 					name: `${organization.name} - ${organization.branches.capeTown.name}`,
 					telephone: organization.branches.capeTown.contact.landline,
-					email: organization.branches.capeTown.contact.staff[0]?.email,
+					email: organization.branches.capeTown.contact.email,
 					address: {
 						'@type': 'PostalAddress',
 						streetAddress: organization.branches.capeTown.location.address.slice(0, -1).join(', '),
@@ -78,7 +78,7 @@ const cptBranch = organization.branches.capeTown;
 			<div class="grid lg:grid-cols-2 gap-12">
 				<!-- Left Column: Branch Information -->
 				<div>
-					<h1 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg Branch</h1>
+					<h1 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg</h1>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4 mb-12">
@@ -111,18 +111,12 @@ const cptBranch = organization.branches.capeTown;
 							</button>
 							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
 								<div class="pb-4 text-black space-y-3">
-									{jhbBranch.contact.landline && (
-										<p><strong>Landline:</strong> {jhbBranch.contact.landline}</p>
+									{jhbBranch.contact.email && (
+										<p>Email: <a href={`mailto:${jhbBranch.contact.email}`} class="underline">{jhbBranch.contact.email}</a></p>
 									)}
-									<div class="space-y-2">
-										{jhbBranch.contact.staff.map((member) => (
-											<div class="">
-												<p><strong>{member.name}</strong> - {member.role}</p>
-												<p>Email: <a href={`mailto:${member.email}`} class="underline">{member.email}</a></p>
-												<p>Cell: {member.cell}</p>
-											</div>
-										))}
-									</div>
+									{jhbBranch.contact.landline && (
+										<p>Phone: <a href={`tel:${jhbBranch.contact.landline.replace(/\s/g, '')}`} class="underline">{jhbBranch.contact.landline}</a></p>
+									)}
 								</div>
 							</div>
 						</div>
@@ -152,7 +146,7 @@ const cptBranch = organization.branches.capeTown;
 						</div>
 					</div>
 
-					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Cape Town Branch</h2>
+					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Cape Town</h2>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4">
@@ -185,18 +179,12 @@ const cptBranch = organization.branches.capeTown;
 							</button>
 							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
 								<div class="pb-4 text-black space-y-3">
-									{cptBranch.contact.landline && (
-										<p><strong>Landline:</strong> {cptBranch.contact.landline}</p>
+									{cptBranch.contact.email && (
+										<p>Email: <a href={`mailto:${cptBranch.contact.email}`} class="underline">{cptBranch.contact.email}</a></p>
 									)}
-									<div class="space-y-2">
-										{cptBranch.contact.staff.map((member) => (
-											<div class="">
-												<p><strong>{member.name}</strong> - {member.role}</p>
-												<p>Email: <a href={`mailto:${member.email}`} class="underline">{member.email}</a></p>
-												<p>Cell: {member.cell}</p>
-											</div>
-										))}
-									</div>
+									{cptBranch.contact.landline && (
+										<p>Phone: <a href={`tel:${cptBranch.contact.landline.replace(/\s/g, '')}`} class="underline">{cptBranch.contact.landline}</a></p>
+									)}
 								</div>
 							</div>
 						</div>
