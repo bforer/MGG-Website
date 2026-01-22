@@ -120,7 +120,7 @@ export const organization: OrganizationData = {
 export const services: ServiceItem[] = [
 	{
 		slug: "lighting-design",
-		title: "Lighting Design + Engineering.",
+		title: "Lighting Design.",
 		blurb:
 			"Designing and implementing an aesthetic and functional lighting plan that enhances the atmosphere and supports the event's objectives. Our team handles setup, programming, and functionality to create memorable visual experiences.",
 		image: "/services/lighting.webp",
@@ -128,7 +128,7 @@ export const services: ServiceItem[] = [
 	},
 	{
 		slug: "sound-design",
-		title: "Sound Design + Engineering.",
+		title: "Sound Design.",
 		blurb:
 			"Selecting microphones, speakers, effects, and audio processing equipment to deliver crystal-clear sound. Our engineers handle setup, calibration, and troubleshooting for optimal sound quality across all event types.",
 		image: "/services/sound-design.webp",
@@ -143,8 +143,8 @@ export const services: ServiceItem[] = [
 		bgColor: "bg-[#74462D]" // Dark brown/bronze
 	},
 	{
-		slug: "video-engineering",
-		title: "Video Engineering.",
+		slug: "video",
+		title: "Video.",
 		blurb:
 			"Professional video production and engineering services including camera setup, live switching, streaming, and projection mapping to deliver high-quality visual content for your event.",
 		image: "/services/video-engineering.webp",
