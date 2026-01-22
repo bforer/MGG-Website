@@ -54,8 +54,13 @@ import Base from '../layouts/BaseLayout.astro';
 		const formDataStr = sessionStorage.getItem('formSubmission');
 		
 		if (!formDataStr) {
-			// No form data found, redirect to contact page
-			window.location.href = '/lets-connect';
+			// No form data found - show a message instead of redirecting
+			if (summaryContent) {
+				summaryContent.innerHTML = `
+					<p class="text-black/70">No form submission data found. If you just submitted a form, please try again.</p>
+				`;
+			}
+			// Don't redirect - allow viewing the page for testing
 			return;
 		}
 

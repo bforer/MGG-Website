@@ -213,12 +213,10 @@
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
 
-			// Check if webhook URL is configured
-			if (N8N_WEBHOOK_URL === 'YOUR_N8N_WEBHOOK_URL_HERE') {
-				formError.textContent = 'Form submission is not configured. Please contact the site administrator.';
-				formError.classList.remove('hidden');
-				console.error('N8N webhook URL not configured. Please set PUBLIC_N8N_WEBHOOK_URL or update the code.');
-				return;
+			// Check if webhook URL is configured (warn but don't block submission)
+			const isWebhookConfigured = N8N_WEBHOOK_URL !== 'YOUR_N8N_WEBHOOK_URL_HERE';
+			if (!isWebhookConfigured) {
+				console.warn('N8N webhook URL not configured. Form will still redirect to thank-you page for testing.');
 			}
 
 			// Validate email confirmation
@@ -283,28 +281,33 @@
 			// Store form data in sessionStorage for thank-you page
 			sessionStorage.setItem('formSubmission', JSON.stringify(data));
 
-			try {
-				// Send to n8n webhook
-				const response = await fetch(N8N_WEBHOOK_URL, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(data),
-				});
+			// If webhook is configured, try to send data
+			if (isWebhookConfigured) {
+				try {
+					// Send to n8n webhook
+					const response = await fetch(N8N_WEBHOOK_URL, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data),
+					});
 
-				if (!response.ok) {
-					throw new Error('Failed to submit form');
+					if (!response.ok) {
+						throw new Error('Failed to submit form');
+					}
+
+					// Redirect to thank-you page on success
+					window.location.href = '/thank-you';
+				} catch (error) {
+					console.error('Form submission error:', error);
+					// Still redirect to thank-you page even if webhook fails
+					// (for testing purposes - you can change this behavior if needed)
+					window.location.href = '/thank-you';
 				}
-
-				// Redirect to thank-you page
+			} else {
+				// Webhook not configured - still redirect to thank-you page for testing
 				window.location.href = '/thank-you';
-			} catch (error) {
-				console.error('Form submission error:', error);
-				formError.classList.remove('hidden');
-				submitBtn.disabled = false;
-				submitText.classList.remove('hidden');
-				submitLoading.classList.add('hidden');
 			}
 		});
 	});

@@ -3,7 +3,7 @@
 
 <button
 	id="scroll-to-top"
-	class="fixed bottom-8 right-8 z-40 bg-black text-white p-4 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+	class="fixed bottom-8 right-8 z-40 bg-black text-white p-4 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 focus:outline-none"
 	aria-label="Scroll to top"
 >
 	<svg
@@ -62,5 +62,14 @@
 	
 	#scroll-to-top:hover {
 		transform: translateY(-2px);
+		background-color: #FFD700 !important;
+		color: black !important;
+	}
+	
+	#scroll-to-top:focus,
+	#scroll-to-top:active {
+		outline: none !important;
+		border: none !important;
+		box-shadow: none !important;
 	}
 </style>
