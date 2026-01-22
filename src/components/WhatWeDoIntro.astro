@@ -1,5 +1,6 @@
 ---
 // Component for the white background "What We Do" intro section on home page
+import RevealOnScroll from './RevealOnScroll.astro';
 ---
 
 <section class="bg-white py-24 relative overflow-hidden">
@@ -16,47 +17,57 @@
 		aria-hidden="true"
 	/>
 	<div class="container relative z-10">
-		<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-12">
-			At MGG, we understand that every event is unique, which is why our core focus is on creating custom technical and staging experiences to assist in bringing the 			<span class="text-black relative inline-block">
-				<img
-					src="/brand/stripe-though.svg"
-					alt=""
-					class="absolute bottom-0 left-0 w-full h-4 md:h-5 lg:h-6 object-contain"
-					aria-hidden="true"
-					style="z-index: 0;"
-				/>
-				<span class="relative z-10">vision</span>
-			</span> to life.
-		</h2>
+		<RevealOnScroll direction="up" delay={0}>
+			<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-12">
+				At MGG, we understand that every event is unique, which is why our core focus is on creating custom technical and staging experiences to assist in bringing the 			<span class="text-black relative inline-block">
+					<img
+						src="/brand/stripe-though.svg"
+						alt=""
+						class="absolute bottom-0 left-0 w-full h-4 md:h-5 lg:h-6 object-contain"
+						aria-hidden="true"
+						style="z-index: 0;"
+					/>
+					<span class="relative z-10">vision</span>
+				</span> to life.
+			</h2>
+		</RevealOnScroll>
 
 		<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-			<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
-				<h3 class="text-xl font-bold text-black mb-3">Technical Supply</h3>
-				<p class="text-black text-md leading-relaxed">
-					MGG's inventory of audiovisual equipment, trucks, and generators provides comprehensive technical solutions for events of all scales.
-				</p>
-			</article>
+			<RevealOnScroll direction="up" delay={100}>
+				<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
+					<h3 class="text-xl font-bold text-black mb-3">Technical Supply</h3>
+					<p class="text-black text-md leading-relaxed">
+						MGG's inventory of audiovisual equipment, trucks, and generators provides comprehensive technical solutions for events of all scales.
+					</p>
+				</article>
+			</RevealOnScroll>
 
-			<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
-				<h3 class="text-xl font-bold text-black mb-3">Technical Production + Design</h3>
-				<p class="text-black text-md leading-relaxed">
-					Our team of project managers and designers work together to create seamless technical experiences tailored to each event's unique requirements.
-				</p>
-			</article>
+			<RevealOnScroll direction="up" delay={200}>
+				<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
+					<h3 class="text-xl font-bold text-black mb-3">Technical Production + Design</h3>
+					<p class="text-black text-md leading-relaxed">
+						Our team of project managers and designers work together to create seamless technical experiences tailored to each event's unique requirements.
+					</p>
+				</article>
+			</RevealOnScroll>
 
-			<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
-				<h3 class="text-xl font-bold text-black mb-3">Fabrication + Printing</h3>
-				<p class="text-black text-md leading-relaxed">
-					Custom design, quality printing, and fabrication services to bring your creative vision to life with precision and attention to detail.
-				</p>
-			</article>
+			<RevealOnScroll direction="up" delay={300}>
+				<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
+					<h3 class="text-xl font-bold text-black mb-3">Fabrication + Printing</h3>
+					<p class="text-black text-md leading-relaxed">
+						Custom design, quality printing, and fabrication services to bring your creative vision to life with precision and attention to detail.
+					</p>
+				</article>
+			</RevealOnScroll>
 
-			<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
-				<h3 class="text-xl font-bold text-black mb-3">Structures + Staging</h3>
-				<p class="text-black text-md leading-relaxed">
-					Safe, certified structures and staging solutions that provide the foundation for memorable events, built to the highest safety standards.
-				</p>
-			</article>
+			<RevealOnScroll direction="up" delay={400}>
+				<article class="border-2 border-brand-yellow bg-white p-6 rounded-lg">
+					<h3 class="text-xl font-bold text-black mb-3">Structures + Staging</h3>
+					<p class="text-black text-md leading-relaxed">
+						Safe, certified structures and staging solutions that provide the foundation for memorable events, built to the highest safety standards.
+					</p>
+				</article>
+			</RevealOnScroll>
 		</div>
 	</div>
 </section>

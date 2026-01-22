@@ -1,8 +1,11 @@
 ---
+import RevealOnScroll from './RevealOnScroll.astro';
 ---
 
 <div>
-	<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Get in touch</h2>
+	<RevealOnScroll direction="up" delay={0}>
+		<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Get in touch</h2>
+	</RevealOnScroll>
 	
 	<form
 		id="contact-form"

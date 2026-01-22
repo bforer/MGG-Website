@@ -1,34 +1,80 @@
 ---
-const { as = 'div', class: klass = '', delay = 0 } = Astro.props;
+interface Props {
+	as?: string;
+	class?: string;
+	delay?: number;
+	direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+	duration?: number;
+}
+
+const { 
+	as = 'div', 
+	class: klass = '', 
+	delay = 0,
+	direction = 'up',
+	duration = 1000
+} = Astro.props;
+
 const Tag = as as any;
+
+// Map direction to initial transform
+const transforms: Record<string, string> = {
+	up: 'translate-y-8',
+	down: '-translate-y-8',
+	left: 'translate-x-8',
+	right: '-translate-x-8',
+	fade: 'translate-y-0'
+};
 ---
 
 <Tag
-	class={`reveal opacity-0 translate-y-6 transition duration-700 ease-out ${klass}`}
+	class={`reveal reveal-${direction} opacity-0 ${transforms[direction]} transition-all ease-out ${klass}`}
+	style={`transition-duration: ${duration}ms; transition-delay: ${delay}ms;`}
+	data-reveal-direction={direction}
 >
 	<slot />
 </Tag>
 
 <style is:global>
-	.in-view {
+	.reveal.in-view {
 		opacity: 1 !important;
-		transform: translateY(0) !important;
+		transform: translate(0, 0) !important;
 	}
 </style>
 
-<script is:inline client:load>
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((e) => {
-				if (e.isIntersecting) e.target.classList.add('in-view');
-			});
-		},
-		{ threshold: 0.16 }
-	);
+<script is:inline>
+	// Only initialize once, even if component is used multiple times
+	if (!window.__revealObserverInitialized) {
+		window.__revealObserverInitialized = true;
+		
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						e.target.classList.add('in-view');
+						// Unobserve after animation to improve performance
+						observer.unobserve(e.target);
+					}
+				});
+			},
+			{ 
+				threshold: 0.1, 
+				rootMargin: '0px 0px -100px 0px' // More negative margin so elements trigger later, more individually
+			}
+		);
 
-	document.querySelectorAll('.reveal').forEach((el, i) => {
-		(el as HTMLElement).style.transitionDelay = `${(i % 8) * 40}ms`;
-		observer.observe(el);
-	});
+		// Wait for DOM to be ready, then observe all reveal elements
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', () => {
+				document.querySelectorAll('.reveal').forEach((el) => {
+					observer.observe(el);
+				});
+			});
+		} else {
+			document.querySelectorAll('.reveal').forEach((el) => {
+				observer.observe(el);
+			});
+		}
+	}
 </script>
 

@@ -141,7 +141,7 @@ import { organization } from '../data/ssot';
 			<!-- Navigation Links -->
 			<nav class="flex-1 mb-12">
 				<ul class="space-y-6">
-					<li>
+					<li class="mobile-menu-item">
 						<a
 							href="/"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
@@ -157,7 +157,7 @@ import { organization } from '../data/ssot';
 							<span class="relative z-10">Home</span>
 						</a>
 					</li>
-					<li>
+					<li class="mobile-menu-item">
 						<a
 							href="/what-we-do"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
@@ -173,7 +173,7 @@ import { organization } from '../data/ssot';
 							<span class="relative z-10">What we do</span>
 						</a>
 					</li>
-					<li>
+					<li class="mobile-menu-item">
 						<a
 							href="/look-book"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
@@ -189,7 +189,7 @@ import { organization } from '../data/ssot';
 							<span class="relative z-10">Look book</span>
 						</a>
 					</li>
-					<li>
+					<li class="mobile-menu-item">
 						<a
 							href="/lets-connect"
 							class="text-black text-3xl font-bold hover:opacity-80 transition relative inline-block"
@@ -313,6 +313,14 @@ import { organization } from '../data/ssot';
 			overlay.classList.remove('translate-x-full');
 			button.setAttribute('aria-expanded', 'true');
 			document.body.style.overflow = 'hidden';
+			
+			// Trigger reveal animations for menu items
+			const menuItems = overlay.querySelectorAll('.mobile-menu-item');
+			menuItems.forEach((item, index) => {
+				setTimeout(() => {
+					item.classList.add('menu-item-visible');
+				}, index * 100);
+			});
 		}
 	};
 
@@ -323,6 +331,12 @@ import { organization } from '../data/ssot';
 			overlay.classList.add('translate-x-full');
 			button.setAttribute('aria-expanded', 'false');
 			document.body.style.overflow = '';
+			
+			// Reset menu item animations
+			const menuItems = overlay.querySelectorAll('.mobile-menu-item');
+			menuItems.forEach((item) => {
+				item.classList.remove('menu-item-visible');
+			});
 		}
 	};
 
@@ -388,6 +402,18 @@ import { organization } from '../data/ssot';
 		-webkit-mask-size: cover;
 		width: 100% !important;
 		height: 0.75rem !important; /* h-3 = 0.75rem */
+	}
+	
+	/* Mobile menu item reveal animations */
+	.mobile-menu-item {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	}
+	
+	.mobile-menu-item.menu-item-visible {
+		opacity: 1;
+		transform: translateY(0);
 	}
 </style>
 

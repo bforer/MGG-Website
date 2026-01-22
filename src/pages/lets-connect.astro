@@ -2,6 +2,7 @@
 import Base from '../layouts/BaseLayout.astro';
 import StructuredData from '../components/StructuredData.astro';
 import ContactForm from '../components/ContactForm.astro';
+import RevealOnScroll from '../components/RevealOnScroll.astro';
 import { siteConfig } from '../data/seo';
 import { organization } from '../data/ssot';
 
@@ -78,12 +79,15 @@ const cptBranch = organization.branches.capeTown;
 			<div class="grid lg:grid-cols-2 gap-12">
 				<!-- Left Column: Branch Information -->
 				<div>
-					<h1 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg</h1>
+					<RevealOnScroll direction="up" delay={0}>
+						<h1 class="text-3xl md:text-2xl font-bold text-black mb-8">Johannesburg</h1>
+					</RevealOnScroll>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4 mb-12">
 						<!-- Location Accordion -->
-						<div class="border-b border-gray-200">
+						<RevealOnScroll direction="up" delay={100}>
+							<div class="border-b border-gray-200">
 							<button
 								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
 								aria-expanded="false"
@@ -119,10 +123,12 @@ const cptBranch = organization.branches.capeTown;
 									)}
 								</div>
 							</div>
-						</div>
+							</div>
+						</RevealOnScroll>
 
 						<!-- Company Info Accordion -->
-						<div class="border-b border-gray-200">
+						<RevealOnScroll direction="up" delay={300}>
+							<div class="border-b border-gray-200">
 							<button
 								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
 								aria-expanded="false"
@@ -143,33 +149,39 @@ const cptBranch = organization.branches.capeTown;
 									)}
 								</div>
 							</div>
-						</div>
+							</div>
+						</RevealOnScroll>
 					</div>
 
-					<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Cape Town</h2>
+					<RevealOnScroll direction="up" delay={400}>
+						<h2 class="text-3xl md:text-2xl font-bold text-black mb-8">Cape Town</h2>
+					</RevealOnScroll>
 					
 					<!-- Accordion Items -->
 					<div class="space-y-4">
 						<!-- Location Accordion -->
-						<div class="border-b border-gray-200">
-							<button
-								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
-								aria-expanded="false"
-							>
-								<span class="font-bold">Location</span>
-								<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
-							</button>
-							<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
-								<div class="pb-4 text-black">
-									{cptBranch.location.address.map((line) => (
-										<p>{line}</p>
-									))}
+						<RevealOnScroll direction="up" delay={500}>
+							<div class="border-b border-gray-200">
+								<button
+									class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
+									aria-expanded="false"
+								>
+									<span class="font-bold">Location</span>
+									<span class="accordion-icon text-xl transition-transform duration-300 ease-in-out">+</span>
+								</button>
+								<div class="accordion-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+									<div class="pb-4 text-black">
+										{cptBranch.location.address.map((line) => (
+											<p>{line}</p>
+										))}
+									</div>
 								</div>
 							</div>
-						</div>
+						</RevealOnScroll>
 
 						<!-- Contact Accordion -->
-						<div class="border-b border-gray-200">
+						<RevealOnScroll direction="up" delay={600}>
+							<div class="border-b border-gray-200">
 							<button
 								class="accordion-btn w-full flex items-center justify-between py-4 text-black text-sm font-medium hover:opacity-80 transition"
 								aria-expanded="false"
@@ -187,12 +199,15 @@ const cptBranch = organization.branches.capeTown;
 									)}
 								</div>
 							</div>
-						</div>
+							</div>
+						</RevealOnScroll>
 					</div>
 				</div>
 
 				<!-- Right Column: Contact Form -->
-				<ContactForm />
+				<RevealOnScroll direction="up" delay={0}>
+					<ContactForm />
+				</RevealOnScroll>
 			</div>
 		</div>
 	</section>

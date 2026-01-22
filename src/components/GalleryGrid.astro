@@ -1,6 +1,7 @@
 ---
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import RevealOnScroll from './RevealOnScroll.astro';
 
 // Read all images from public/lookbook folder
 const lookbookDir = join(process.cwd(), 'public', 'lookbook');
@@ -38,19 +39,21 @@ const imagesJson = JSON.stringify(images);
 	<div class="w-full px-6">
 		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 			{images.map((img, idx) => (
-				<button
-					class="group relative overflow-hidden rounded-xl aspect-square"
-					aria-label={`Open ${img.alt}`}
-					data-index={idx}
-					onclick={`openModal(${idx})`}
-				>
-					<img
-						src={img.url}
-						alt={img.alt}
-						loading="lazy"
-						class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-					/>
-				</button>
+				<RevealOnScroll direction="up" delay={0}>
+						<button
+							class="group relative overflow-hidden rounded-xl aspect-square"
+							aria-label={`Open ${img.alt}`}
+							data-index={idx}
+							onclick={`openModal(${idx})`}
+						>
+							<img
+								src={img.url}
+								alt={img.alt}
+								loading="lazy"
+								class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+							/>
+						</button>
+					</RevealOnScroll>
 			))}
 		</div>
 	</div>

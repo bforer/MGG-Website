@@ -1,6 +1,7 @@
 ---
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import RevealOnScroll from './RevealOnScroll.astro';
 
 // Read all images from public/lookbook folder
 const lookbookDir = join(process.cwd(), 'public', 'lookbook');
@@ -30,66 +31,74 @@ const allImagesJson = JSON.stringify(allImages);
 <section class="bg-white py-8 md:py-12 pb-0 md:pb-0">
 	<div class="w-full">
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-0">
-			<button
-				id="home-img-btn-0"
-				class="group relative overflow-hidden aspect-square cursor-pointer"
-				aria-label="Open image 1"
-				data-index="0"
-				onclick="openHomeModal(0)"
-			>
-				<img
-					id="home-img-0"
-					src=""
-					alt="MGG Event Production - Professional technical staging and event production services"
-					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
-					loading="lazy"
-				/>
-			</button>
-			<button
-				id="home-img-btn-1"
-				class="group relative overflow-hidden aspect-square cursor-pointer"
-				aria-label="Open image 2"
-				data-index="1"
-				onclick="openHomeModal(1)"
-			>
-				<img
-					id="home-img-1"
-					src=""
-					alt="MGG Event Production - Professional technical staging and event production services"
-					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
-					loading="lazy"
-				/>
-			</button>
-			<button
-				id="home-img-btn-2"
-				class="group relative overflow-hidden aspect-square cursor-pointer"
-				aria-label="Open image 3"
-				data-index="2"
-				onclick="openHomeModal(2)"
-			>
-				<img
-					id="home-img-2"
-					src=""
-					alt="MGG Event Production - Professional technical staging and event production services"
-					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
-					loading="lazy"
-				/>
-			</button>
-			<button
-				id="home-img-btn-3"
-				class="group relative overflow-hidden aspect-square cursor-pointer"
-				aria-label="Open image 4"
-				data-index="3"
-				onclick="openHomeModal(3)"
-			>
-				<img
-					id="home-img-3"
-					src=""
-					alt="MGG Event Production - Professional technical staging and event production services"
-					class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
-					loading="lazy"
-				/>
-			</button>
+			<RevealOnScroll direction="fade" delay={0}>
+				<button
+					id="home-img-btn-0"
+					class="group relative overflow-hidden aspect-square cursor-pointer"
+					aria-label="Open image 1"
+					data-index="0"
+					onclick="openHomeModal(0)"
+				>
+					<img
+						id="home-img-0"
+						src=""
+						alt="MGG Event Production - Professional technical staging and event production services"
+						class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+						loading="lazy"
+					/>
+				</button>
+			</RevealOnScroll>
+			<RevealOnScroll direction="fade" delay={100}>
+				<button
+					id="home-img-btn-1"
+					class="group relative overflow-hidden aspect-square cursor-pointer"
+					aria-label="Open image 2"
+					data-index="1"
+					onclick="openHomeModal(1)"
+				>
+					<img
+						id="home-img-1"
+						src=""
+						alt="MGG Event Production - Professional technical staging and event production services"
+						class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+						loading="lazy"
+					/>
+				</button>
+			</RevealOnScroll>
+			<RevealOnScroll direction="fade" delay={200}>
+				<button
+					id="home-img-btn-2"
+					class="group relative overflow-hidden aspect-square cursor-pointer"
+					aria-label="Open image 3"
+					data-index="2"
+					onclick="openHomeModal(2)"
+				>
+					<img
+						id="home-img-2"
+						src=""
+						alt="MGG Event Production - Professional technical staging and event production services"
+						class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+						loading="lazy"
+					/>
+				</button>
+			</RevealOnScroll>
+			<RevealOnScroll direction="fade" delay={300}>
+				<button
+					id="home-img-btn-3"
+					class="group relative overflow-hidden aspect-square cursor-pointer"
+					aria-label="Open image 4"
+					data-index="3"
+					onclick="openHomeModal(3)"
+				>
+					<img
+						id="home-img-3"
+						src=""
+						alt="MGG Event Production - Professional technical staging and event production services"
+						class="w-full h-full aspect-square object-cover transition duration-500 group-hover:scale-105"
+						loading="lazy"
+					/>
+				</button>
+			</RevealOnScroll>
 		</div>
 	</div>
 
