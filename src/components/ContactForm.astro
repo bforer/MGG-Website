@@ -9,7 +9,7 @@ import RevealOnScroll from './RevealOnScroll.astro';
 	
 	<form
 		id="contact-form"
-		class="space-y-6"
+		class="space-y-6 relative"
 		method="POST"
 	>
 		<!-- First Name -->
@@ -156,6 +156,12 @@ import RevealOnScroll from './RevealOnScroll.astro';
 			></textarea>
 		</div>
 
+		<!-- Honeypot field (hidden from users, bots will fill it) -->
+		<div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+			<label for="website">Website (leave blank)</label>
+			<input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+		</div>
+
 		<!-- Disclaimer -->
 		<div class="space-y-4">
 			<h3 class="text-black font-bold">Disclaimer *</h3>
@@ -208,6 +214,13 @@ import RevealOnScroll from './RevealOnScroll.astro';
 			return;
 		}
 
+		// Spam protection: Track form start time
+		const formStartTime = Date.now();
+		
+		// Spam protection: Rate limiting (prevent multiple submissions)
+		let lastSubmissionTime = 0;
+		const MIN_SUBMISSION_INTERVAL = 5000; // 5 seconds between submissions
+
 		// Replace with your n8n webhook URL
 		// Option 1: Set environment variable PUBLIC_N8N_WEBHOOK_URL in .env file
 		// Option 2: Replace 'YOUR_N8N_WEBHOOK_URL_HERE' with your actual webhook URL
@@ -215,6 +228,43 @@ import RevealOnScroll from './RevealOnScroll.astro';
 
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
+
+			// Spam protection: Check honeypot field
+			const honeypot = (form.querySelector('#website') as HTMLInputElement).value;
+			if (honeypot) {
+				// Bot detected - silently fail
+				console.warn('Spam detected: honeypot field filled');
+				formError.textContent = 'There was an error submitting your form. Please try again or contact us directly.';
+				formError.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitText.classList.remove('hidden');
+				submitLoading.classList.add('hidden');
+				return;
+			}
+
+			// Spam protection: Check if form was filled too quickly (likely a bot)
+			const formFillTime = Date.now() - formStartTime;
+			const MIN_FILL_TIME = 3000; // Minimum 3 seconds to fill form (reasonable for humans)
+			if (formFillTime < MIN_FILL_TIME) {
+				console.warn('Spam detected: form filled too quickly');
+				formError.textContent = 'Please take your time filling out the form.';
+				formError.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitText.classList.remove('hidden');
+				submitLoading.classList.add('hidden');
+				return;
+			}
+
+			// Spam protection: Rate limiting
+			const timeSinceLastSubmission = Date.now() - lastSubmissionTime;
+			if (timeSinceLastSubmission < MIN_SUBMISSION_INTERVAL) {
+				formError.textContent = 'Please wait a moment before submitting again.';
+				formError.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitText.classList.remove('hidden');
+				submitLoading.classList.add('hidden');
+				return;
+			}
 
 			// Check if webhook URL is configured (warn but don't block submission)
 			const isWebhookConfigured = N8N_WEBHOOK_URL !== 'YOUR_N8N_WEBHOOK_URL_HERE';
@@ -229,6 +279,9 @@ import RevealOnScroll from './RevealOnScroll.astro';
 			if (email !== confirmEmail) {
 				formError.textContent = 'Email addresses do not match. Please check and try again.';
 				formError.classList.remove('hidden');
+				submitBtn.disabled = false;
+				submitText.classList.remove('hidden');
+				submitLoading.classList.add('hidden');
 				return;
 			}
 
@@ -281,6 +334,9 @@ import RevealOnScroll from './RevealOnScroll.astro';
 			// Add referrer URL (page user came from before the form page)
 			data.referrerUrl = document.referrer || 'Direct access';
 
+			// Update last submission time
+			lastSubmissionTime = Date.now();
+
 			// Store form data in sessionStorage for thank-you page
 			sessionStorage.setItem('formSubmission', JSON.stringify(data));
 
@@ -304,9 +360,11 @@ import RevealOnScroll from './RevealOnScroll.astro';
 					window.location.href = '/thank-you';
 				} catch (error) {
 					console.error('Form submission error:', error);
-					// Still redirect to thank-you page even if webhook fails
-					// (for testing purposes - you can change this behavior if needed)
-					window.location.href = '/thank-you';
+					formError.textContent = 'There was an error submitting your form. Please try again or contact us directly.';
+					formError.classList.remove('hidden');
+					submitBtn.disabled = false;
+					submitText.classList.remove('hidden');
+					submitLoading.classList.add('hidden');
 				}
 			} else {
 				// Webhook not configured - still redirect to thank-you page for testing
