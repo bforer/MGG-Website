@@ -108,7 +108,7 @@ export const organization: OrganizationData = {
 				}
 			},
 			contact: {
-				landline: "011 608 4094",
+				landline: "021 815 9880",
 				email: "info@mgg.co.za",
 				staff: []
 			},

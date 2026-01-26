@@ -7,6 +7,9 @@ const isActive = (path: string) => {
 };
 
 import { organization } from '../data/ssot';
+
+// Get Johannesburg branch contact info for mobile menu
+const jhbContact = organization.branches.johannesburg.contact;
 ---
 
 <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
@@ -212,13 +215,13 @@ import { organization } from '../data/ssot';
 			<div class="mb-12 text-black">
 				<p class="font-bold text-lg mb-4">Contact</p>
 				<div class="space-y-2 text-sm">
-					{organization.contact.email && (
-						<p>E: <a href={`mailto:${organization.contact.email}`} class="hover:opacity-80">{organization.contact.email}</a></p>
+					{jhbContact.email && (
+						<p>E: <a href={`mailto:${jhbContact.email}`} class="hover:opacity-80">{jhbContact.email}</a></p>
 					)}
-					{organization.contact.telephone && (
-						<p>T: <a href={`tel:${organization.contact.telephone}`} class="hover:opacity-80">{organization.contact.telephone}</a></p>
+					{jhbContact.landline && (
+						<p>T: <a href={`tel:${jhbContact.landline.replace(/\s/g, '')}`} class="hover:opacity-80">{jhbContact.landline}</a></p>
 					)}
-					{!organization.contact.email && !organization.contact.telephone && (
+					{!jhbContact.email && !jhbContact.landline && (
 						<>
 							<p>E: <a href="mailto:info@mgg.co.za" class="hover:opacity-80">info@mgg.co.za</a></p>
 							<p>T: <a href="tel:+27112345678" class="hover:opacity-80">+27 11 234 5678</a></p>
