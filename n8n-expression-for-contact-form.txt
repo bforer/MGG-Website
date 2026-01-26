@@ -1,0 +1,22 @@
+// Updated n8n Expression for Contact Form
+// Copy this into your Expression node in n8n
+
+{
+  "text_mkvvacjz": "{{ $('Webhook').item.json.body.referenceNumber }}",
+  "text_mkvvpfw2": "{{ $('Webhook').item.json.body.submittedAt }}",
+  "text_mkvv3z51": {
+    "url": "{{ $('Webhook').item.json.body.submittedFromUrl }}",
+    "text": "{{ $('Webhook').item.json.body.submittedFromUrl }}"
+  },
+  "text_mkvv74bj": "{{ $('Webhook').item.json.body.firstName }} {{ $('Webhook').item.json.body.lastName }}\n{{ $('Webhook').item.json.body.email }}\n{{ $('Webhook').item.json.body.contactNumber }}\n{{ $('Webhook').item.json.body.companyName || '' }}\nBranch: {{ $('Webhook').item.json.body.branch === 'johannesburg' ? 'Johannesburg' : $('Webhook').item.json.body.branch === 'cape-town' ? 'Cape Town' : $('Webhook').item.json.body.branch }}\n{{ $('Webhook').item.json.body.startDate ? 'Start Date: ' + $('Webhook').item.json.body.startDate : '' }}\n{{ $('Webhook').item.json.body.endDate ? 'End Date: ' + $('Webhook').item.json.body.endDate : '' }}\n{{ $('Webhook').item.json.body.numberOfDays ? 'Number of Days: ' + $('Webhook').item.json.body.numberOfDays : '' }}\n{{ $('Webhook').item.json.body.message }}"
+}
+
+// Key Changes:
+// - Removed .formData nesting - fields are directly in body
+// - Changed formData.firstName to body.firstName
+// - Changed formData.lastName to body.lastName
+// - Changed formData.email to body.email
+// - Changed formData.phone to body.contactNumber
+// - Added companyName, branch, startDate, endDate, numberOfDays, message
+// - Branch formatting: converts 'johannesburg' to 'Johannesburg' and 'cape-town' to 'Cape Town'
+// - Uses || '' for optional fields to avoid errors

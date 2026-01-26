@@ -1,0 +1,16 @@
+{
+  "referenceNumber": "{{ $('Webhook').item.json.body.referenceNumber }}",
+  "firstName": "{{ $('Webhook').item.json.body.firstName }}",
+  "lastName": "{{ $('Webhook').item.json.body.lastName }}",
+  "email": "{{ $('Webhook').item.json.body.email }}",
+  "contactNumber": "{{ $('Webhook').item.json.body.contactNumber }}",
+  "companyName": "{{ $('Webhook').item.json.body.companyName || '' }}",
+  "branch": "{{ $('Webhook').item.json.body.branch === 'johannesburg' ? 'Johannesburg' : $('Webhook').item.json.body.branch === 'cape-town' ? 'Cape Town' : $('Webhook').item.json.body.branch }}",
+  "startDate": "{{ $('Webhook').item.json.body.startDate || '' }}",
+  "endDate": "{{ $('Webhook').item.json.body.endDate || '' }}",
+  "numberOfDays": "{{ $('Webhook').item.json.body.numberOfDays || '' }}",
+  "message": "{{ $('Webhook').item.json.body.message }}",
+  "submittedAt": "{{ $('Webhook').item.json.body.submittedAt }}",
+  "submittedFromUrl": "{{ $('Webhook').item.json.body.submittedFromUrl }}",
+  "referrerUrl": "{{ $('Webhook').item.json.body.referrerUrl || '' }}"
+}

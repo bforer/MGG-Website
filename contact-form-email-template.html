@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Form Received – Ref {{ $json.body.referenceNumber }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Resets */
+    body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse !important; }
+    img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+    /* Base */
+    body { margin:0 !important; padding:0 !important; width:100% !important; background:#f4f6f8; font-family:'Urbanist', Arial, sans-serif !important; color:#2a2a2a; }
+    .container { width:600px; max-width:100%; background:#ffffff; border-radius:10px; overflow:hidden; }
+    .header { background:#FFD700; color:#000000; padding:28px 24px; text-align:center; }
+    .header h1 { margin:0; font-size:22px; line-height:1.2; font-weight:600; }
+    .sub { margin:8px 0 0; font-size:14px; opacity:.85; color:#000000; }
+    .wrap { padding:24px; }
+    .pill { display:inline-block; background:#fff9d9; color:#000000; padding:8px 12px; border-radius:999px; font-size:14px; font-weight:600; border:1px solid #FFD700; }
+    .kv { width:100%; }
+    .kv td { padding:10px 0; vertical-align:top; font-size:15px; }
+    .kv .k { width:38%; color:#6b7280; }
+    .kv .v a { color:#FFD700; text-decoration:none; word-break:break-all; font-weight:600; }
+    .card { border:1px solid #fff9d9; border-radius:8px; padding:16px; background:#fffef5; }
+    .cta-row { padding-top:14px; }
+    .btn { font-size:16px; font-weight:600; text-decoration:none; background:#FFD700; color:#000000; padding:12px 20px; border-radius:8px; display:inline-block; }
+    .muted { font-size:12px; color:#6b7280; line-height:1.6; }
+    .footer { background:#0f0f0f; color:#bfbfbf; font-size:12px; text-align:center; padding:16px; }
+    @media screen and (max-width:600px) {
+      .wrap { padding:20px; }
+      .kv .k { width:42%; }
+    }
+  </style>
+  <!-- Preheader (hidden preview text) -->
+  <meta name="x-apple-disable-message-reformatting">
+</head>
+<body>
+  <!-- Hidden Preheader Text -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+    We've received your contact form submission. Ref {{ $json.body.referenceNumber }}. We'll get back to you shortly.
+  </div>
+
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" class="container" cellspacing="0" cellpadding="0" border="0">
+          <!-- HEADER -->
+          <tr>
+            <td class="header">
+              <h1>Thank you for contacting us</h1>
+              <div class="sub">We've received your inquiry and will get back to you shortly.</div>
+            </td>
+          </tr>
+
+          <!-- BODY -->
+          <tr>
+            <td class="wrap">
+              <!-- Reference -->
+              <p class="pill">Reference: {{ $json.body.referenceNumber }}</p>
+
+              <!-- Key Details -->
+              <table role="presentation" class="kv">
+                <tr>
+                  <td class="k">Name</td>
+                  <td class="v">{{ $json.body.firstName }} {{ $json.body.lastName }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Email</td>
+                  <td class="v"><a href="mailto:{{ $json.body.email }}">{{ $json.body.email }}</a></td>
+                </tr>
+                <tr>
+                  <td class="k">Phone</td>
+                  <td class="v"><a href="tel:{{ $json.body.contactNumber }}">{{ $json.body.contactNumber }}</a></td>
+                </tr>
+                <tr>
+                  <td class="k">Company</td>
+                  <td class="v">{{ $json.body.companyName }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Branch</td>
+                  <td class="v">{{ $json.body.branch }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Start Date</td>
+                  <td class="v">{{ $json.body.startDate }}</td>
+                </tr>
+                <tr>
+                  <td class="k">End Date</td>
+                  <td class="v">{{ $json.body.endDate }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Number of Days</td>
+                  <td class="v">{{ $json.body.numberOfDays }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Submitted</td>
+                  <td class="v">{{ $json.body.submittedAt }}</td>
+                </tr>
+                <tr>
+                  <td class="k">Submitted From</td>
+                  <td class="v"><a href="{{ $json.body.submittedFromUrl }}">{{ $json.body.submittedFromUrl }}</a></td>
+                </tr>
+              </table>
+
+              <!-- Message -->
+              <div style="height:16px;"></div>
+              <div class="card">
+                <strong>Your Message</strong>
+                <div style="margin-top:6px; white-space:pre-wrap;">{{ $json.body.message }}</div>
+              </div>
+
+              <!-- CTA -->
+              <div class="cta-row">
+                <!--[if mso]>
+                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{ $json.body.submittedFromUrl }}" style="height:44px;v-text-anchor:middle;width:220px;" arcsize="12%" stroke="f" fillcolor="#FFD700">
+                  <w:anchorlock/>
+                  <center style="color:#000000;font-family:Arial, sans-serif;font-size:16px;font-weight:600;">View contact page</center>
+                </v:roundrect>
+                <![endif]-->
+                <!--[if !mso]><!-->
+                <a href="{{ $json.body.submittedFromUrl }}" class="btn">View contact page</a>
+                <!--<![endif]-->
+              </div>
+
+              <div style="height:16px;"></div>
+              <p class="muted">
+                If any of the details above are incorrect, simply reply to this email and let us know.
+                This confirmation was sent to {{ $json.body.email }} for reference {{ $json.body.referenceNumber }}.
+              </p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td class="footer">
+              &copy; 2026 MGG. All rights reserved.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
