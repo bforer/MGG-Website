@@ -18,17 +18,23 @@ Build command is `npm run build` (Azure’s Custom preset uses this by default).
 
 ---
 
-## 2. Build-time environment variable (n8n webhook)
+## 2. Build-time environment variables
+
+### n8n webhook
 
 The contact form uses `PUBLIC_N8N_WEBHOOK_URL` (see `src/components/ContactForm.astro`). That value is inlined at **build time**, so the GitHub Actions build must have access to it.
 
 **.env is gitignored**, so the build on Azure will not see your local `.env`. Do this instead:
 
-1. **GitHub:** In the repo (e.g. `MGG-Website`) go to **Settings → Secrets and variables → Actions**. Add a new **secret**:
-   - Name: `PUBLIC_N8N_WEBHOOK_URL`
-   - Value: your n8n webhook URL (e.g. `https://brendan.bls.co.za/webhook/mgg-enquiries`).
+1. **GitHub:** In the repo (e.g. `MGG-Website`) go to **Settings → Secrets and variables → Actions**. Add **secrets**:
+   - `PUBLIC_N8N_WEBHOOK_URL` = your n8n webhook URL (e.g. `https://brendan.bls.co.za/webhook/mgg-enquiries`)
+   - `PUBLIC_SITE_URL` = `https://mgg.co.za` — used for SEO canonicals, OG tags, and sitemap
 
-2. **Workflow:** After the first deployment, Azure will have created a workflow under `.github/workflows/` (e.g. `azure-static-web-apps-<name>.yml`). Open it and add the secret to the **build** step so the build sees the env var.
+### Site URL (SEO, canonicals, sitemap)
+
+Set `PUBLIC_SITE_URL` to `https://mgg.co.za`. It is used for canonical URLs, Open Graph URLs, structured data, and the sitemap. Add it as a GitHub Actions secret and pass it into the build step alongside `PUBLIC_N8N_WEBHOOK_URL` (see below).
+
+2. **Workflow:** After the first deployment, Azure will have created a workflow under `.github/workflows/` (e.g. `azure-static-web-apps-<name>.yml`). Open it and add the secrets to the **build** step so the build sees the env vars.
 
    Find the step that runs the app build (often a step with `npm run build` or that uses `app_build_command`). Add an `env` block to that step:
 
@@ -40,6 +46,7 @@ The contact form uses `PUBLIC_N8N_WEBHOOK_URL` (see `src/components/ContactForm.
        # ... existing inputs (azure_static_web_apps_api_token, repo_token, etc.) ...
      env:
        PUBLIC_N8N_WEBHOOK_URL: ${{ secrets.PUBLIC_N8N_WEBHOOK_URL }}
+       PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
    ```
 
    If the build step uses a different name or structure, add the same `env` block to the step that runs the front-end build.

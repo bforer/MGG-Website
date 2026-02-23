@@ -55,7 +55,7 @@ export type OrganizationData = {
 
 export const organization: OrganizationData = {
 	name: "MGG",
-	url: "http://localhost:4321",
+	url: import.meta.env.PUBLIC_SITE_URL ?? "http://localhost:4321",
 	logo: "/brand/mgg-logo.webp",
 	socialMedia: {
 		// Add social media URLs here when available
