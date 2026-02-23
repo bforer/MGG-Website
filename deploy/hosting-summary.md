@@ -48,7 +48,16 @@ Summary of decisions and recommendations for hosting the MGG event-planning stat
 
 ---
 
-## 6. Reference
+## 6. Azure Static Web Apps – project adjustments
+
+- **No code changes** to the Astro app are required.
+- **Required:** Set build config in Azure (App location `/`, Output location `dist`, Api location blank). Add `PUBLIC_N8N_WEBHOOK_URL` as a GitHub Actions secret and pass it in the workflow build step so the contact form webhook is available at build time. See **[azure-static-web-apps.md](./azure-static-web-apps.md)** for step-by-step setup.
+- **Optional:** Add `staticwebapp.config.json` only if you need redirects or custom headers.
+- **FTP:** `deploy.js` and npm deploy scripts can stay; they are not used for Azure SWA (deploy is via GitHub push).
+
+---
+
+## 7. Reference
 
 - Official pricing: [Azure Static Web Apps pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/static/)
-- Project: static Astro site (`output: "static"`); current deploy via FTP (`deploy.js`). Moving to Azure Static Web Apps would replace FTP with GitHub Actions (or similar) deploying the `dist/` output.
+- Project: static Astro site (`output: "static"`); current deploy via FTP (`deploy.js`). Azure Static Web Apps deploys via GitHub Actions from the `dist/` output.
